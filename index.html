@@ -838,7 +838,6 @@
       display: none;
     }
 
-    /* Móvil: 3 arriba y 2 abajo centrados */
     .entrevistas-grid {
       width: 100%;
       max-width: 350px;
@@ -880,7 +879,6 @@
       -webkit-user-drag: none;
     }
 
-    /* Subtítulo en Owners Medium Italic */
     .interview-caption {
       display: inline-block;
       font-family: var(--font-body);
@@ -895,7 +893,6 @@
       transition: none;
     }
 
-    /* Franja amarilla al pasar el cursor o tocar */
     .interview-card:hover .interview-caption,
     .interview-card:focus-visible .interview-caption,
     .interview-card:active .interview-caption {
@@ -936,7 +933,6 @@
         padding-top: 24px;
       }
 
-      /* Desktop: los 5 cuadros en una sola fila horizontal */
       .entrevistas-grid {
         max-width: none;
         width: 100%;
@@ -958,6 +954,177 @@
 
       .entrevistas-footer-title {
         grid-column: 1 / 3;
+        grid-row: 2;
+        align-self: end;
+      }
+    }
+
+    /* ==========================================================================
+       10. PESTAÑA QUIÉN SOMOS_ (MÓVIL + DESKTOP)
+       ========================================================================== */
+    .quienes-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .quienes-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .quienes-stage {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(14px, 2.4vh, 24px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .quienes-stage::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quienes-stack {
+      width: 100%;
+      max-width: 310px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px, 2.4vh, 22px);
+    }
+
+    .quienes-block {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 3.85vw, 1.06rem);
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--ink-white);
+    }
+
+    .quienes-block-1 {
+      padding-left: 0;
+      max-width: 245px;
+    }
+
+    .quienes-block-2 {
+      padding-left: clamp(24px, 9vw, 44px);
+      max-width: 275px;
+    }
+
+    .quienes-block-3 {
+      padding-left: clamp(48px, 16vw, 76px);
+      max-width: 295px;
+    }
+
+    .quienes-ig-row {
+      display: flex;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .instagram-link {
+      display: inline-block;
+      text-decoration: none;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(0.9rem, 3.85vw, 1.06rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink-white);
+      background-color: transparent;
+      padding: 2px 6px;
+      transition: none;
+    }
+
+    .instagram-link:hover,
+    .instagram-link:focus-visible,
+    .instagram-link:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    @media (min-width: 900px) {
+      .quienes-view.is-active {
+        display: grid;
+        grid-template-columns: 185px 1fr 220px;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 42px;
+        gap: 24px 32px;
+      }
+
+      .quienes-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .quienes-stage {
+        grid-column: 2;
+        grid-row: 1;
+        height: 100%;
+        overflow: hidden;
+        justify-content: center;
+        padding-left: clamp(24px, 4vw, 72px);
+      }
+
+      .quienes-stack {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        gap: clamp(22px, 3.6vh, 42px);
+      }
+
+      .quienes-block {
+        font-size: clamp(1.3rem, 1.85vw, 1.95rem);
+        line-height: 1.04;
+      }
+
+      .quienes-block-1 {
+        padding-left: 0;
+        max-width: 440px;
+      }
+
+      .quienes-block-2 {
+        padding-left: clamp(90px, 11vw, 175px);
+        max-width: 580px;
+      }
+
+      .quienes-block-3 {
+        padding-left: clamp(170px, 20vw, 310px);
+        max-width: 640px;
+      }
+
+      .quienes-ig-row {
+        grid-column: 3;
+        grid-row: 1;
+        align-items: flex-start;
+        justify-content: flex-end;
+        padding-top: clamp(72px, 13vh, 130px);
+      }
+
+      .instagram-link {
+        font-size: clamp(1.1rem, 1.35vw, 1.4rem);
+        padding: 2px 8px;
+      }
+
+      .quienes-footer-title {
+        grid-column: 1 / 4;
         grid-row: 2;
         align-self: end;
       }
@@ -1036,7 +1203,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
       <ul class="desktop-side-nav">
@@ -1047,7 +1214,7 @@
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
 
@@ -1102,7 +1269,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
       <ul class="desktop-side-nav">
@@ -1113,7 +1280,7 @@
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
 
@@ -1148,7 +1315,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
       <ul class="desktop-side-nav">
@@ -1159,7 +1326,7 @@
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
 
@@ -1212,7 +1379,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
       <ul class="desktop-side-nav">
@@ -1223,7 +1390,7 @@
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
 
@@ -1269,7 +1436,6 @@
         </span>
       </button>
 
-      <!-- Índice superior en móvil con separadores "|" -->
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
@@ -1277,10 +1443,9 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
-      <!-- Índice lateral vertical en escritorio -->
       <ul class="desktop-side-nav">
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
@@ -1289,7 +1454,7 @@
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
 
@@ -1333,6 +1498,73 @@
     </div>
 
     <h1 class="section-footer-title entrevistas-footer-title">Entrevistas_</h1>
+
+  </section>
+
+  <!-- 9. PESTAÑA QUIÉN SOMOS_ -->
+  <section class="dark-section quienes-view" id="quienes-view" aria-label="Sección Quién Somos_">
+
+    <div class="quienes-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="quienes-stage">
+      <div class="quienes-stack">
+        <p class="quienes-block quienes-block-1">
+          Somos una plataforma de arte dedicada a producir exposiciones artísticas y a alzar la voz por problemas sociales[cite: 6, 7].
+        </p>
+
+        <p class="quienes-block quienes-block-2">
+          Fundado en Monterrey 2025 con la creencia de que el arte debe de fomentarse libre del yugo coorporativo, y ser autogestivos[cite: 6, 7].
+        </p>
+
+        <p class="quienes-block quienes-block-3">
+          Nuestra plataforma busca darle un lugar a los artistas underground sin importar estadísticas ni estéticas[cite: 6, 7].
+        </p>
+      </div>
+    </div>
+
+    <div class="quienes-ig-row">
+      <a
+        href="https://www.instagram.com/arte.underground_/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram-link"
+        id="quienes-instagram-link"
+      >instagram</a>
+    </div>
+
+    <h1 class="section-footer-title quienes-footer-title">Quién<br>Somos_</h1>
 
   </section>
 
@@ -1545,6 +1777,7 @@
       const fr1View = document.getElementById('fr1-view');
       const fr2View = document.getElementById('fr2-view');
       const entrevistasView = document.getElementById('entrevistas-view');
+      const quienesView = document.getElementById('quienes-view');
       const fr1Carousel = document.getElementById('fr1-carousel');
       const fr2Carousel = document.getElementById('fr2-carousel');
 
@@ -1558,6 +1791,7 @@
         fr1View.classList.remove('is-active');
         fr2View.classList.remove('is-active');
         entrevistasView.classList.remove('is-active');
+        quienesView.classList.remove('is-active');
 
         if (targetRoute === 'tikets') {
           ticketsView.classList.add('is-active');
@@ -1579,6 +1813,10 @@
           GraffitiEngine.disable();
         } else if (targetRoute === 'entrevistas') {
           entrevistasView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'quienes-somos') {
+          quienesView.classList.add('is-active');
           document.body.style.backgroundColor = '#000000';
           GraffitiEngine.disable();
         } else {
@@ -1623,7 +1861,12 @@
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const route = link.dataset.route;
-          if (route === 'tikets' || route === 'exposiciones' || route === 'entrevistas') {
+          if (
+            route === 'tikets' ||
+            route === 'exposiciones' ||
+            route === 'entrevistas' ||
+            route === 'quienes-somos'
+          ) {
             navigateTo(route);
           }
         });
