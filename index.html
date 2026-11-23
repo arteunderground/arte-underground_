@@ -256,9 +256,9 @@
     }
 
     /* ==========================================================================
-       5. PESTAÑA TIKETS_ (SIN SCROLL EN MÓVIL, TODO VISIBLE DE UN VISTAZO)
+       5. ESTILOS COMPARTIDOS DE PESTAÑAS OSCURAS (TIKETS_ & EXPOSICIONES_)
        ========================================================================== */
-    .tickets-view {
+    .dark-section {
       position: fixed;
       inset: 0;
       width: 100vw;
@@ -275,7 +275,118 @@
         calc(18px + env(safe-area-inset-left));
     }
 
-    /* En móvil: Logo arriba -> Bloque Comprar arriba de la foto -> Flyer -> Tikets_ abajo */
+    .section-logo-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      display: inline-block;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .section-logo-btn img {
+      display: block;
+      width: clamp(78px, 21vw, 118px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Índice superior en móvil con separadores "|" */
+    .mobile-pipe-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 74vw;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(0.72rem, 2.85vw, 0.88rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--ink-white);
+    }
+
+    .mobile-pipe-nav .pipe-item {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .mobile-pipe-nav .pipe-sep {
+      margin: 0 3px;
+      color: var(--ink-white);
+    }
+
+    .section-nav-btn {
+      background: transparent;
+      border: none;
+      padding: 1px 5px;
+      font-family: var(--font-index);
+      font-weight: 500;
+      color: var(--ink-white);
+      cursor: pointer;
+      text-align: left;
+      transition: none;
+    }
+
+    /* Franja amarilla en seco con texto negro al pasar cursor o tocar */
+    .section-nav-btn:hover,
+    .section-nav-btn:focus-visible,
+    .section-nav-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    .section-nav-btn.is-current {
+      color: var(--accent-yellow);
+    }
+
+    .section-nav-btn.is-current:hover,
+    .section-nav-btn:focus-visible,
+    .section-nav-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+    }
+
+    /* Índice lateral vertical en escritorio (>= 900px) */
+    .desktop-side-nav {
+      display: none;
+      list-style: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .desktop-side-nav .section-nav-btn {
+      font-size: 0.92rem;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      padding: 1px 6px;
+    }
+
+    .section-footer-title {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(2.1rem, 9.5vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 900px) {
+      .mobile-pipe-nav {
+        display: none;
+      }
+
+      .desktop-side-nav {
+        display: flex;
+      }
+    }
+
+    /* ==========================================================================
+       6. PESTAÑA TIKETS_
+       ========================================================================== */
     .tickets-view.is-active {
       display: flex;
       flex-direction: column;
@@ -292,50 +403,6 @@
       flex-shrink: 0;
     }
 
-    .tickets-logo {
-      background: none;
-      border: none;
-      padding: 0;
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .tickets-logo img {
-      display: block;
-      width: clamp(78px, 21vw, 118px);
-      height: auto;
-      object-fit: contain;
-    }
-
-    /* Menú compacto vertical en móvil (oculto en la parte superior móvil para dar espacio al bloque Comprar y Flyer) */
-    .tickets-mini-nav {
-      display: none;
-      list-style: none;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .tickets-mini-link {
-      background: none;
-      border: none;
-      padding: 0;
-      text-align: left;
-      font-family: var(--font-index);
-      font-weight: 500;
-      font-size: 0.92rem;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      color: var(--ink-white);
-      cursor: pointer;
-    }
-
-    .tickets-mini-link.is-current,
-    .tickets-mini-link:hover,
-    .tickets-mini-link:active {
-      color: var(--accent-yellow);
-    }
-
-    /* Contenedor central: en móvil ordena Comprar encima de la imagen */
     .tickets-stage {
       flex: 1;
       min-height: 0;
@@ -401,7 +468,6 @@
       color: var(--ink-white);
     }
 
-    /* Marco que garantiza que la imagen inclinada quepa completa sin recortarse */
     .flyer-frame {
       flex: 1;
       min-height: 0;
@@ -424,23 +490,10 @@
       transform-origin: center center;
     }
 
-    /* Título grande Tikets_ inferior */
-    .tickets-footer-title {
-      font-family: var(--font-index);
-      font-weight: 500;
-      font-size: clamp(2.1rem, 9.5vw, 4.5rem);
-      line-height: 0.98;
-      letter-spacing: -0.03em;
-      color: var(--ink-white);
-      align-self: flex-start;
-      flex-shrink: 0;
-    }
-
-    /* Vista escritorio (>= 900px) fiel a la referencia horizontal */
     @media (min-width: 900px) {
       .tickets-view.is-active {
         display: grid;
-        grid-template-columns: 170px 1fr 230px;
+        grid-template-columns: 170px 1fr 240px;
         grid-template-rows: 1fr auto;
         align-items: center;
         padding: 34px 42px;
@@ -456,17 +509,14 @@
         gap: 18px;
       }
 
-      .tickets-mini-nav {
-        display: flex;
-      }
-
       .tickets-stage {
         grid-column: 2 / 4;
         grid-row: 1;
         height: 100%;
         display: grid;
-        grid-template-columns: 1fr 230px;
+        grid-template-columns: 1fr 240px;
         align-items: center;
+        align-content: center;
         justify-items: center;
         gap: 32px;
       }
@@ -479,12 +529,97 @@
         padding: 20px;
       }
 
+      /* Centrado vertical en escritorio, no pegado arriba */
       .event-cta-box {
         grid-column: 2;
+        align-self: center;
         gap: 8px;
       }
 
       .tickets-footer-title {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+      }
+    }
+
+    /* ==========================================================================
+       7. PESTAÑA EXPOSICIONES_
+       ========================================================================== */
+    .exposiciones-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .exposiciones-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .exposiciones-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(6px, 1.5vh, 14px);
+      text-align: center;
+    }
+
+    .expo-item-btn {
+      background: transparent;
+      border: none;
+      padding: 2px 12px;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(1.5rem, 6.4vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--ink-white);
+      cursor: pointer;
+      transition: none;
+    }
+
+    .expo-item-btn:hover,
+    .expo-item-btn:focus-visible,
+    .expo-item-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    @media (min-width: 900px) {
+      .exposiciones-view.is-active {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: center;
+        padding: 34px 42px;
+        gap: 20px 36px;
+      }
+
+      .exposiciones-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .exposiciones-list {
+        grid-column: 2;
+        grid-row: 1;
+        align-items: flex-start;
+        text-align: left;
+        justify-self: center;
+      }
+
+      .section-footer-title {
         grid-column: 1;
         grid-row: 2;
         align-self: end;
@@ -543,11 +678,11 @@
   <div class="screen-wipe" id="screen-wipe" aria-hidden="true"></div>
 
   <!-- 4. PESTAÑA TIKETS_ -->
-  <section class="tickets-view" id="tickets-view" aria-label="Sección Tikets_">
+  <section class="dark-section tickets-view" id="tickets-view" aria-label="Sección Tikets_">
 
     <div class="tickets-topbar">
       <!-- Logo blanco en PNG (clic/tap vuelve a la Home) -->
-      <button type="button" class="tickets-logo" id="back-to-home-btn" aria-label="Volver a inicio">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
         <img
           src="logo au blanco@300x.png"
           alt="arte underground_"
@@ -558,21 +693,32 @@
         </span>
       </button>
 
-      <!-- Índice rápido lateral en escritorio -->
-      <ul class="tickets-mini-nav">
-        <li><button type="button" class="tickets-mini-link is-current" data-route="tikets">Tikets_</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Exposiciones_</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Entrevistas_</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Blog_</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Merch_</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Directorio</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Artistas_</button></li>
-        <li><button type="button" class="tickets-mini-link" data-route="home">Quien somos_</button></li>
+      <!-- Índice móvil con separadores "|" -->
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+      </nav>
+
+      <!-- Índice lateral vertical en escritorio -->
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
       </ul>
     </div>
 
     <div class="tickets-stage">
-      <!-- Bloque de compra (en móvil va arriba de la foto; en escritorio a la derecha) -->
+      <!-- Bloque de compra (en móvil va arriba de la foto; en escritorio centrado a la derecha) -->
       <div class="event-cta-box">
         <h2 class="event-title">Expo II _</h2>
         <a
@@ -598,7 +744,57 @@
       </div>
     </div>
 
-    <h1 class="tickets-footer-title">Tikets_</h1>
+    <h1 class="section-footer-title">Tikets_</h1>
+
+  </section>
+
+  <!-- 5. PESTAÑA EXPOSICIONES_ -->
+  <section class="dark-section exposiciones-view" id="exposiciones-view" aria-label="Sección Exposiciones_">
+
+    <div class="exposiciones-topbar">
+      <!-- Logo blanco en PNG (clic/tap vuelve a la Home) -->
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <!-- Índice móvil con separadores "|" -->
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+      </nav>
+
+      <!-- Índice lateral vertical en escritorio -->
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <!-- Listado principal de exposiciones -->
+    <div class="exposiciones-list">
+      <button type="button" class="expo-item-btn" data-expo="fashion-runway-1">FASHION RUNWAY I_</button>
+      <button type="button" class="expo-item-btn" data-expo="fashion-runway-2">FASHION RUNWAY II_</button>
+    </div>
+
+    <h1 class="section-footer-title">Exposiciones_</h1>
 
   </section>
 
@@ -777,12 +973,35 @@
       const wipe = document.getElementById('screen-wipe');
       const homeView = document.getElementById('home-view');
       const ticketsView = document.getElementById('tickets-view');
-      const backHomeBtn = document.getElementById('back-to-home-btn');
+      const exposicionesView = document.getElementById('exposiciones-view');
 
+      let currentRoute = 'home';
       let isTransitioning = false;
 
+      function applyRouteView(targetRoute) {
+        homeView.style.display = 'none';
+        ticketsView.classList.remove('is-active');
+        exposicionesView.classList.remove('is-active');
+
+        if (targetRoute === 'tikets') {
+          ticketsView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'exposiciones') {
+          exposicionesView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else {
+          homeView.style.display = '';
+          document.body.style.backgroundColor = '#ffffff';
+          GraffitiEngine.enable();
+        }
+
+        currentRoute = targetRoute;
+      }
+
       function navigateTo(targetRoute) {
-        if (isTransitioning) return;
+        if (isTransitioning || targetRoute === currentRoute) return;
         isTransitioning = true;
 
         // 1. Sube el telón negro sólido desde abajo
@@ -791,17 +1010,7 @@
         wipe.classList.add('is-rising');
 
         setTimeout(() => {
-          if (targetRoute === 'tikets') {
-            homeView.style.display = 'none';
-            ticketsView.classList.add('is-active');
-            document.body.style.backgroundColor = '#000000';
-            GraffitiEngine.disable();
-          } else {
-            ticketsView.classList.remove('is-active');
-            homeView.style.display = '';
-            document.body.style.backgroundColor = '#ffffff';
-            GraffitiEngine.enable();
-          }
+          applyRouteView(targetRoute);
 
           // 2. Retira el telón hacia arriba para revelar la vista destino
           wipe.classList.remove('is-rising');
@@ -819,22 +1028,28 @@
         }, 340);
       }
 
+      // Enlaces del índice principal en la Home
       document.querySelectorAll('.nav-link').forEach((link) => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const route = link.dataset.route;
-          if (route === 'tikets') {
-            navigateTo('tikets');
+          if (route === 'tikets' || route === 'exposiciones') {
+            navigateTo(route);
           }
         });
       });
 
-      backHomeBtn.addEventListener('click', () => navigateTo('home'));
+      // Logo blanco en secciones oscuras -> regresa a Home
+      document.querySelectorAll('.js-go-home').forEach((btn) => {
+        btn.addEventListener('click', () => navigateTo('home'));
+      });
 
-      document.querySelectorAll('.tickets-mini-link').forEach((btn) => {
+      // Botones del índice dentro de Tikets_ y Exposiciones_
+      document.querySelectorAll('.section-nav-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
-          if (btn.dataset.route === 'home') {
-            navigateTo('home');
+          const route = btn.dataset.route;
+          if (route) {
+            navigateTo(route);
           }
         });
       });
