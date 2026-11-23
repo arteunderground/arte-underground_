@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <!-- viewport-fit=cover asegura que el fondo cubra toda la pantalla en iPhone con notch -->
+  <!-- viewport-fit=cover asegura cobertura completa en pantallas con notch (iOS / Android) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>arte underground_</title>
 
@@ -14,12 +14,13 @@
        1. VARIABLES DE DISEÑO Y RESET BASE
        ========================================================================== */
     :root {
-      --bg-color: #ffffff;
-      --ink-color: #000000;
+      --bg-white: #ffffff;
+      --bg-black: #000000;
+      --ink-black: #000000;
+      --ink-white: #ffffff;
       --accent-yellow: #f3e600;
       --frame-border: 14px;
 
-      /* Familias tipográficas con respaldo local/sistema */
       --font-index: 'akzidenz-grotesk-next-pro', 'Akzidenz-Grotesk Next Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       --font-body: 'owners', 'Owners', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
@@ -28,26 +29,22 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      /* Evita selección accidental de texto al arrastrar el dedo para pintar */
-      -webkit-user-select: none;
-      user-select: none;
       -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
       width: 100%;
       height: 100%;
-      /* 100dvh adapta la altura real en Safari iOS y Chrome Android */
       min-height: 100dvh;
       overflow: hidden;
-      background-color: var(--bg-color);
-      color: var(--ink-color);
-      font-family: var(--font-body);
+      background-color: var(--bg-white);
+      color: var(--ink-black);
+      font-family: var(--font-index);
       -webkit-font-smoothing: antialiased;
     }
 
     /* ==========================================================================
-       2. CAPA DEL MOTOR DE GRAFITI (SOLO HOME PAGE)
+       2. MOTOR DE GRAFITI (EXCLUSIVO DE LA HOME PAGE)
        ========================================================================== */
     #graffiti-canvas {
       position: fixed;
@@ -56,23 +53,25 @@
       height: 100dvh;
       z-index: 1;
       display: block;
-      /* Bloquea el scroll/zoom nativo al deslizar el dedo para que pinte fluido */
       touch-action: none;
       cursor: crosshair;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     /* ==========================================================================
-       3. CONTENEDOR PRINCIPAL DE LA HOME (LAYOUT ADAPTATIVO)
+       3. HOME PAGE (LAYOUT ADAPTATIVO)
        ========================================================================== */
     .home-shell {
       position: relative;
       z-index: 2;
       width: 100%;
       height: 100dvh;
-      /* Permite que los clics y arrastres en espacios blancos lleguen al canvas */
+      /* Permite que clics y arrastres en espacios libres lleguen al canvas */
       pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
 
-      /* Estructura Mobile-First (Vertical, fiel al diseño móvil) */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -83,11 +82,11 @@
         calc(24px + env(safe-area-inset-left));
     }
 
-    /* --- Bloque 1: Logo --- */
     .brand-logo {
       align-self: flex-start;
-      pointer-events: auto; /* Evita pintar encima del logo */
+      pointer-events: auto;
       display: inline-block;
+      text-decoration: none;
     }
 
     .brand-logo img {
@@ -97,7 +96,7 @@
       object-fit: contain;
     }
 
-    /* --- Bloque 2: Índice de Navegación (Akzidenz-Grotesk Next Pro Medium) --- */
+    /* Índice centrado con alineación derecha en los ítems */
     .main-nav {
       align-self: center;
       display: flex;
@@ -108,39 +107,38 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      /* Mantiene el borde derecho recto con el guion bajo y centra el bloque */
       align-items: flex-end;
       gap: clamp(6px, 1.4vh, 12px);
     }
 
     .nav-item {
-      pointer-events: auto; /* Reactiva interacción solo sobre el enlace */
+      pointer-events: auto;
     }
 
+    /* La barra amarilla entra en seco (sin transition) */
     .nav-link {
       display: inline-block;
       text-decoration: none;
       font-family: var(--font-index);
-      font-weight: 500; /* Medium */
-      color: var(--ink-color);
+      font-weight: 500;
+      color: var(--ink-black);
       background-color: transparent;
       font-size: clamp(1.55rem, 6.2vw, 2.5rem);
       letter-spacing: -0.025em;
       line-height: 1.15;
       padding: 2px 10px;
-      transition: background-color 0.12s ease, color 0.12s ease;
+      transition: none;
     }
 
-    /* Hover en escritorio + estado activo/foco al tocar en iOS/Android */
     .nav-link:hover,
     .nav-link:focus-visible,
     .nav-link:active {
-      background-color: var(--ink-color);
+      background-color: var(--ink-black);
       color: var(--accent-yellow);
       outline: none;
     }
 
-    /* --- Bloque 3: Manifiesto / Descripción del costado (Owners Medium) --- */
+    /* Manifiesto justificado en todas las líneas */
     .brand-manifesto {
       align-self: center;
       width: 100%;
@@ -150,18 +148,15 @@
 
     .brand-manifesto p {
       font-family: var(--font-body);
-      font-weight: 500; /* Medium */
+      font-weight: 500;
       font-size: clamp(0.88rem, 3.6vw, 1rem);
       line-height: 1.25;
       letter-spacing: -0.015em;
-      /* Justificado completo en todas las líneas, incluida la última */
       text-align: justify;
       text-align-last: justify;
     }
 
-    /* ==========================================================================
-       4. BOTÓN LIMPIAR MURO (HERRAMIENTA DEL GRAFITI)
-       ========================================================================== */
+    /* Botón limpiar muro (solo visible en Home cuando hay trazos) */
     #clear-spray-btn {
       position: fixed;
       bottom: calc(16px + env(safe-area-inset-bottom));
@@ -172,33 +167,26 @@
       font-weight: 500;
       letter-spacing: -0.01em;
       padding: 6px 12px;
-      background-color: var(--ink-color);
+      background-color: var(--ink-black);
       color: var(--accent-yellow);
       border: none;
       cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, background-color 0.15s ease, color 0.15s ease;
+      display: none;
     }
 
     #clear-spray-btn.is-visible {
-      opacity: 1;
-      pointer-events: auto;
+      display: inline-block;
     }
 
     #clear-spray-btn:hover,
     #clear-spray-btn:active {
       background-color: var(--accent-yellow);
-      color: var(--ink-color);
+      color: var(--ink-black);
     }
 
-    /* ==========================================================================
-       5. VISTA ESCRITORIO / TABLET HORIZONTAL (>= 900px)
-       ========================================================================== */
     @media (min-width: 900px) {
       .home-shell {
-        /* Marco negro exterior visto en la referencia de escritorio */
-        border: var(--frame-border) solid var(--ink-color);
+        border: var(--frame-border) solid var(--ink-black);
         display: grid;
         grid-template-columns: auto 1fr auto;
         align-items: center;
@@ -241,44 +229,278 @@
         right: calc(var(--frame-border) + 18px);
       }
     }
+
+    /* ==========================================================================
+       4. TRANSICIÓN SÓLIDA DE ABAJO A ARRIBA (SIN DEGRADADO)
+       ========================================================================== */
+    .screen-wipe {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+      background-color: var(--bg-black);
+      z-index: 50;
+      transform: translateY(100%);
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .screen-wipe.is-rising {
+      transform: translateY(0%);
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .screen-wipe.is-leaving {
+      transform: translateY(-100%);
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ==========================================================================
+       5. PESTAÑA TIKETS_ (FONDO NEGRO, TEXTO BLANCO, FRANJA AMARILLA -> BLANCO)
+       ========================================================================== */
+    .tickets-view {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+      z-index: 20;
+      background-color: var(--bg-black);
+      color: var(--ink-white);
+      display: none;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding:
+        calc(22px + env(safe-area-inset-top))
+        calc(22px + env(safe-area-inset-right))
+        calc(28px + env(safe-area-inset-bottom))
+        calc(22px + env(safe-area-inset-left));
+    }
+
+    .tickets-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* Columna izquierda: Logo blanco + índice compacto */
+    .tickets-sidebar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .tickets-logo {
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .tickets-logo img {
+      display: block;
+      width: clamp(92px, 24vw, 128px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    .tickets-mini-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .tickets-mini-link {
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink-white);
+      cursor: pointer;
+    }
+
+    .tickets-mini-link.is-current {
+      color: var(--accent-yellow);
+    }
+
+    .tickets-mini-link:hover,
+    .tickets-mini-link:active {
+      color: var(--accent-yellow);
+    }
+
+    /* Centro / Derecha: Evento + Botón COMPRAR + Fecha + Flyer */
+    .tickets-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      width: 100%;
+    }
+
+    .event-cta-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .event-title {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(1.35rem, 5vw, 2.1rem);
+      letter-spacing: -0.02em;
+      color: var(--ink-white);
+    }
+
+    /* Franja amarilla por defecto; cambia a blanco al pasar cursor o tocar */
+    .buy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(1.3rem, 4.8vw, 1.95rem);
+      letter-spacing: -0.02em;
+      padding: 4px 22px;
+      transition: none;
+    }
+
+    .buy-btn:hover,
+    .buy-btn:focus-visible,
+    .buy-btn:active {
+      background-color: var(--ink-white);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    .event-date {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(1.2rem, 4.4vw, 1.8rem);
+      letter-spacing: -0.02em;
+      color: var(--ink-white);
+    }
+
+    /* Contenedor listo para FLYER PARED-06.png */
+    .flyer-frame {
+      width: min(82vw, 390px);
+      aspect-ratio: 1 / 1.05;
+      background-color: var(--ink-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .flyer-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Título grande Tikets_ inferior */
+    .tickets-footer-title {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(2.6rem, 11vw, 4.6rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+    }
+
+    /* Vista escritorio (>= 900px) fiel a la referencia horizontal */
+    @media (min-width: 900px) {
+      .tickets-view.is-active {
+        display: grid;
+        grid-template-columns: 180px 1fr 240px;
+        grid-template-rows: 1fr auto;
+        align-items: center;
+        padding: 36px 44px;
+        gap: 24px 36px;
+        overflow: hidden;
+      }
+
+      .tickets-sidebar {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: start;
+      }
+
+      .tickets-stage {
+        grid-column: 2 / 4;
+        grid-row: 1;
+        display: grid;
+        grid-template-columns: 1fr 240px;
+        align-items: center;
+        justify-items: center;
+        gap: 32px;
+      }
+
+      .flyer-frame {
+        grid-column: 1;
+        width: min(38vw, 440px);
+        max-height: 76dvh;
+      }
+
+      .event-cta-box {
+        grid-column: 2;
+      }
+
+      .tickets-footer-title {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- LIENZO INTERACTIVO DE GRAFITI (Fondo exclusivo de la Home Page) -->
+  <!-- 1. MOTOR DE GRAFITI (SOLO EN HOME PAGE) -->
   <canvas id="graffiti-canvas" aria-label="Lienzo de grafiti con aerosol"></canvas>
 
-  <!-- ESTRUCTURA PRINCIPAL DE LA HOME PAGE -->
+  <!-- 2. HOME PAGE -->
   <main class="home-shell" id="home-view">
 
-    <!-- 1. LOGO DE LA MARCA (Reemplaza el src con la ruta de tu PNG) -->
-    <a href="#inicio" class="brand-logo" aria-label="arte underground_ inicio">
+    <!-- Logo negro en PNG -->
+    <a href="#inicio" class="brand-logo" id="home-logo-link" aria-label="arte underground_ inicio">
       <img
-        <img
-  src="logo au negro@300x.png"
-  alt="arte underground_"
+        src="logo au negro@300x.png"
+        alt="arte underground_"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
       />
-      <!-- Respaldo tipográfico automático mientras vinculas tu archivo PNG -->
       <span style="display:none; font-family:var(--font-index); font-weight:500; font-size:1.7rem; line-height:0.9; letter-spacing:-0.03em;">
         arte<br>under<br>ground_
       </span>
     </a>
 
-    <!-- 2. ÍNDICE DE NAVEGACIÓN -->
+    <!-- Índice de navegación -->
     <nav class="main-nav" aria-label="Menú principal">
       <ul class="nav-list">
-        <li class="nav-item"><a href="#tikets" class="nav-link" data-section="tikets">Tikets_</a></li>
-        <li class="nav-item"><a href="#exposiciones" class="nav-link" data-section="exposiciones">Exposiciones_</a></li>
-        <li class="nav-item"><a href="#entrevistas" class="nav-link" data-section="entrevistas">Entrevistas_</a></li>
-        <li class="nav-item"><a href="#blog" class="nav-link" data-section="blog">Blog_</a></li>
-        <li class="nav-item"><a href="#merch" class="nav-link" data-section="merch">Merch_</a></li>
-        <li class="nav-item"><a href="#directorio" class="nav-link" data-section="directorio">Directorio Artistas_</a></li>
-        <li class="nav-item"><a href="#quienes-somos" class="nav-link" data-section="quienes-somos">Quien somos_</a></li>
+        <li class="nav-item"><a href="#tikets" class="nav-link" data-route="tikets">Tikets_</a></li>
+        <li class="nav-item"><a href="#exposiciones" class="nav-link" data-route="exposiciones">Exposiciones_</a></li>
+        <li class="nav-item"><a href="#entrevistas" class="nav-link" data-route="entrevistas">Entrevistas_</a></li>
+        <li class="nav-item"><a href="#blog" class="nav-link" data-route="blog">Blog_</a></li>
+        <li class="nav-item"><a href="#merch" class="nav-link" data-route="merch">Merch_</a></li>
+        <li class="nav-item"><a href="#directorio" class="nav-link" data-route="directorio">Directorio Artistas_</a></li>
+        <li class="nav-item"><a href="#quienes-somos" class="nav-link" data-route="quienes-somos">Quien somos_</a></li>
       </ul>
     </nav>
 
-    <!-- 3. PEQUEÑA DESCRIPCIÓN / MANIFIESTO -->
+    <!-- Manifiesto justificado en todas las líneas -->
     <aside class="brand-manifesto">
       <p>
         Somos una plataforma de arte dedicada a producir exposiciones artísticas y a alzar la voz ante problemas sociales.
@@ -287,17 +509,72 @@
 
   </main>
 
-  <!-- BOTÓN PARA LIMPIAR EL AEROSOL -->
+  <!-- Botón limpiar muro (solo en Home) -->
   <button id="clear-spray-btn" type="button" title="Limpiar trazos de grafiti (Tecla C)">
     Limpiar muro_
   </button>
 
+  <!-- 3. TELÓN DE TRANSICIÓN SÓLIDO (DE ABAJO A ARRIBA, SIN DEGRADADO) -->
+  <div class="screen-wipe" id="screen-wipe" aria-hidden="true"></div>
+
+  <!-- 4. PESTAÑA TIKETS_ -->
+  <section class="tickets-view" id="tickets-view" aria-label="Sección Tikets_">
+
+    <div class="tickets-sidebar">
+      <!-- Logo blanco en PNG (clic/tap vuelve a la Home) -->
+      <button type="button" class="tickets-logo" id="back-to-home-btn" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <!-- Índice rápido lateral -->
+      <ul class="tickets-mini-nav">
+        <li><button type="button" class="tickets-mini-link is-current" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Exposiciones_</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Blog_</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Merch_</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Directorio</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="tickets-mini-link" data-route="home">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="tickets-stage">
+      <!-- Imagen del flyer lista para vincular -->
+      <div class="flyer-frame">
+        <img
+          src="FLYER PARED-06.png"
+          alt="Flyer Expo II Fashion Runway"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#000000; font-family:var(--font-index); font-weight:500; font-size:0.95rem; padding:16px; text-align:center;">
+          FLYER PARED-06.png
+        </span>
+      </div>
+
+      <!-- Información del evento y botón COMPRAR -->
+      <div class="event-cta-box">
+        <h2 class="event-title">Expo II _</h2>
+        <button type="button" class="buy-btn" id="buy-ticket-btn">COMPRAR</button>
+        <p class="event-date">19 / 12 / 26</p>
+      </div>
+    </div>
+
+    <h1 class="tickets-footer-title">Tikets_</h1>
+
+  </section>
+
   <script>
-    /**
-     * MOTOR DE GRAFITI INTERACTIVO (Módulo encapsulado)
-     * - Activo únicamente mientras la Home Page está visible.
-     * - Compatible con mouse (escritorio) y eventos táctiles (iOS / Android).
-     */
+    /* ========================================================================
+       MOTOR DE GRAFITI (SOLO ACTIVO EN LA HOME PAGE)
+       ======================================================================== */
     const GraffitiEngine = (() => {
       const canvas = document.getElementById('graffiti-canvas');
       const ctx = canvas.getContext('2d');
@@ -310,11 +587,9 @@
       let hasPaint = false;
       let strokeCount = 0;
 
-      // Paleta de aerosol sincronizada con la identidad (#0a0a0a y #f3e600)
       const sprayPalette = ['#0a0a0a', '#141414', '#f3e600', '#0a0a0a', '#0a0a0a'];
       let currentSprayColor = sprayPalette[0];
 
-      // Ajusta la resolución del canvas a pantallas Retina / High-DPI sin borrar lo pintado
       function resizeCanvas() {
         const dpr = window.devicePixelRatio || 1;
         const temp = document.createElement('canvas');
@@ -352,7 +627,6 @@
         clearBtn.classList.remove('is-visible');
       }
 
-      // Simula partículas de aerosol y escurrimiento (drip) al detenerse
       function sprayAt(x, y, speed = 0) {
         if (!isEnabled) return;
 
@@ -372,7 +646,6 @@
           ctx.fillRect(px, py, dotSize, dotSize);
         }
 
-        // Efecto de goteo vertical cuando el trazo es lento
         if (speed < 3.5 && Math.random() < 0.045) {
           const dripLength = 10 + Math.random() * 34;
           const dripX = x + (Math.random() - 0.5) * 8;
@@ -397,7 +670,6 @@
         revealClearButton();
       }
 
-      // Interpola puntos entre coordenadas para trazos continuos al deslizar rápido
       function sprayLine(x0, y0, x1, y1) {
         const dx = x1 - x0;
         const dy = y1 - y0;
@@ -410,7 +682,6 @@
         }
       }
 
-      // Eventos Pointer (unifica mouse, dedo en iOS/Android y stylus)
       canvas.addEventListener('pointerdown', (e) => {
         if (!isEnabled) return;
         if (e.button !== 0 && e.pointerType === 'mouse') return;
@@ -453,7 +724,6 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
-      // Métodos públicos para activar/desactivar el motor al navegar a otras secciones
       return {
         enable() {
           isEnabled = true;
@@ -465,9 +735,86 @@
           isSpraying = false;
           canvas.style.display = 'none';
           clearBtn.classList.remove('is-visible');
-        },
-        clear: clearSpray
+        }
       };
+    })();
+
+    /* ========================================================================
+       NAVEGACIÓN Y TRANSICIÓN SÓLIDA DE ABAJO A ARRIBA (SIN DEGRADADO)
+       ======================================================================== */
+    (() => {
+      const wipe = document.getElementById('screen-wipe');
+      const homeView = document.getElementById('home-view');
+      const ticketsView = document.getElementById('tickets-view');
+      const backHomeBtn = document.getElementById('back-to-home-btn');
+      const buyBtn = document.getElementById('buy-ticket-btn');
+
+      let isTransitioning = false;
+
+      function navigateTo(targetRoute) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        // 1. Sube el telón negro sólido desde abajo
+        wipe.classList.remove('is-leaving');
+        void wipe.offsetWidth; // Reflow forzado para reiniciar la posición
+        wipe.classList.add('is-rising');
+
+        setTimeout(() => {
+          if (targetRoute === 'tikets') {
+            homeView.style.display = 'none';
+            ticketsView.classList.add('is-active');
+            document.body.style.backgroundColor = '#000000';
+            GraffitiEngine.disable();
+          } else {
+            ticketsView.classList.remove('is-active');
+            homeView.style.display = '';
+            document.body.style.backgroundColor = '#ffffff';
+            GraffitiEngine.enable();
+          }
+
+          // 2. Retira el telón hacia arriba para revelar la vista destino
+          wipe.classList.remove('is-rising');
+          wipe.classList.add('is-leaving');
+
+          setTimeout(() => {
+            wipe.style.transition = 'none';
+            wipe.classList.remove('is-leaving');
+            wipe.style.transform = 'translateY(100%)';
+            void wipe.offsetWidth;
+            wipe.style.transition = '';
+            wipe.style.transform = '';
+            isTransitioning = false;
+          }, 350);
+        }, 340);
+      }
+
+      // Enlaces del índice principal en la Home
+      document.querySelectorAll('.nav-link').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const route = link.dataset.route;
+          if (route === 'tikets') {
+            navigateTo('tikets');
+          }
+        });
+      });
+
+      // Volver a la Home desde el logo blanco o enlaces laterales en Tikets_
+      backHomeBtn.addEventListener('click', () => navigateTo('home'));
+
+      document.querySelectorAll('.tickets-mini-link').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.route === 'home') {
+            navigateTo('home');
+          }
+        });
+      });
+
+      // Acción lista para conectar tu link/pasarela de boletos de Expo II
+      buyBtn.addEventListener('click', () => {
+        // Ejemplo: window.open('TU_LINK_DE_BOLETOS', '_blank', 'noopener,noreferrer');
+      });
     })();
   </script>
 </body>
