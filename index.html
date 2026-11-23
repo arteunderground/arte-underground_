@@ -626,9 +626,9 @@
     }
 
     /* ==========================================================================
-       8. DETALLE: FASHION RUNWAY I _ (MÓVIL + DESKTOP)
+       8. DETALLE COMPARTIDO: FASHION RUNWAY I _ Y II _ (MÓVIL + DESKTOP)
        ========================================================================== */
-    .fr1-view.is-active {
+    .runway-detail-view.is-active {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -636,7 +636,7 @@
       gap: 12px;
     }
 
-    .fr1-topbar {
+    .runway-topbar {
       width: 100%;
       display: flex;
       align-items: flex-start;
@@ -644,8 +644,7 @@
       flex-shrink: 0;
     }
 
-    /* Contenedor de galería horizontal (sangra hasta los bordes laterales para mostrar el recorte de la siguiente foto) */
-    .fr1-gallery-wrap {
+    .runway-gallery-wrap {
       flex: 1;
       min-height: 0;
       display: flex;
@@ -654,13 +653,15 @@
       margin-right: calc(-18px - env(safe-area-inset-right));
     }
 
-    .fr1-carousel {
+    .runway-carousel {
       width: 100%;
       height: 100%;
       max-height: 44dvh;
       display: flex;
       align-items: stretch;
       gap: 14px;
+      padding-top: 6px;
+      padding-bottom: 6px;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-snap-type: x mandatory;
@@ -673,17 +674,16 @@
       scrollbar-width: none;
     }
 
-    .fr1-carousel::-webkit-scrollbar {
+    .runway-carousel::-webkit-scrollbar {
       display: none;
     }
 
-    .fr1-carousel.is-dragging {
+    .runway-carousel.is-dragging {
       cursor: grabbing;
       scroll-snap-type: none;
     }
 
-    /* En móvil caben 2 cuadros completos y se asoma el borde del 3ro */
-    .fr1-slide {
+    .runway-slide {
       flex: 0 0 calc((100vw - 36px - 14px) / 2.18);
       height: 100%;
       background-color: var(--accent-yellow);
@@ -694,7 +694,7 @@
       user-select: none;
     }
 
-    .fr1-slide img {
+    .runway-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -703,15 +703,20 @@
       -webkit-user-drag: none;
     }
 
-    /* Párrafo descriptivo en Owners Medium (500) */
-    .fr1-description {
+    /* Rotación de 1 grado exclusiva para Fashion Runway II */
+    .fr2-view .runway-slide {
+      transform: rotate(1deg);
+      transform-origin: center center;
+    }
+
+    .runway-description {
       align-self: center;
       width: 100%;
       max-width: 245px;
       flex-shrink: 0;
     }
 
-    .fr1-description p {
+    .runway-description p {
       font-family: var(--font-body);
       font-weight: 500;
       font-size: clamp(0.84rem, 3.4vw, 0.96rem);
@@ -722,8 +727,7 @@
       text-align-last: justify;
     }
 
-    /* Título en dos líneas abajo a la izquierda */
-    .fr1-title {
+    .runway-title {
       font-family: var(--font-index);
       font-weight: 500;
       font-size: clamp(2.15rem, 9.6vw, 4.35rem);
@@ -735,7 +739,7 @@
     }
 
     @media (min-width: 900px) {
-      .fr1-view.is-active {
+      .runway-detail-view.is-active {
         display: grid;
         grid-template-columns: 185px 1fr;
         grid-template-rows: 1fr auto;
@@ -744,7 +748,7 @@
         gap: 28px 28px;
       }
 
-      .fr1-topbar {
+      .runway-topbar {
         grid-column: 1;
         grid-row: 1;
         height: 100%;
@@ -753,7 +757,7 @@
         gap: 18px;
       }
 
-      .fr1-gallery-wrap {
+      .runway-gallery-wrap {
         grid-column: 2;
         grid-row: 1;
         margin: 0;
@@ -761,27 +765,23 @@
         min-width: 0;
       }
 
-      .fr1-carousel {
+      .runway-carousel {
         max-height: 100%;
         height: 100%;
-        gap: 20px;
-        padding-left: 0;
+        gap: 22px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 6px;
         padding-right: 42px;
-        scroll-padding-left: 0;
+        scroll-padding-left: 6px;
       }
 
-      /* En desktop se ven 3 cuadros completos y asoma el 4to a la derecha */
-      .fr1-slide {
-        flex: 0 0 calc((100% - 40px) / 3.22);
+      .runway-slide {
+        flex: 0 0 calc((100% - 44px) / 3.22);
         height: 100%;
       }
 
-      /* Fila inferior en desktop: Título a la izquierda y párrafo a la derecha */
-      .fr1-bottom-desktop-wrapper {
-        display: contents;
-      }
-
-      .fr1-title {
+      .runway-title {
         grid-column: 1 / 3;
         grid-row: 2;
         align-self: end;
@@ -789,7 +789,7 @@
         font-size: clamp(3.1rem, 4.6vw, 4.4rem);
       }
 
-      .fr1-description {
+      .runway-description {
         grid-column: 2;
         grid-row: 2;
         align-self: end;
@@ -798,9 +798,168 @@
         max-width: 265px;
       }
 
-      .fr1-description p {
+      .runway-description p {
         font-size: clamp(0.9rem, 1.05vw, 1.02rem);
         line-height: 1.24;
+      }
+    }
+
+    /* ==========================================================================
+       9. PESTAÑA ENTREVISTAS_ (MÓVIL + DESKTOP)
+       ========================================================================== */
+    .entrevistas-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .entrevistas-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .entrevistas-stage {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .entrevistas-stage::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Móvil: 3 arriba y 2 abajo centrados */
+    .entrevistas-grid {
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px 12px;
+    }
+
+    .interview-card {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 0 0 calc((100% - 24px) / 3);
+      text-align: center;
+      transition: none;
+    }
+
+    .interview-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: var(--accent-yellow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .interview-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Subtítulo en Owners Medium Italic */
+    .interview-caption {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-style: italic;
+      font-size: clamp(0.76rem, 3.1vw, 0.92rem);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink-white);
+      background-color: transparent;
+      padding: 1px 6px;
+      transition: none;
+    }
+
+    /* Franja amarilla al pasar el cursor o tocar */
+    .interview-card:hover .interview-caption,
+    .interview-card:focus-visible .interview-caption,
+    .interview-card:active .interview-caption {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    .interview-card:focus-visible {
+      outline: none;
+    }
+
+    @media (min-width: 900px) {
+      .entrevistas-view.is-active {
+        display: grid;
+        grid-template-columns: 185px 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 42px;
+        gap: 24px 32px;
+      }
+
+      .entrevistas-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .entrevistas-stage {
+        grid-column: 2;
+        grid-row: 1;
+        height: 100%;
+        overflow: hidden;
+        align-items: flex-start;
+        padding-top: 24px;
+      }
+
+      /* Desktop: los 5 cuadros en una sola fila horizontal */
+      .entrevistas-grid {
+        max-width: none;
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: clamp(16px, 2vw, 30px);
+      }
+
+      .interview-card {
+        flex: 1 1 0;
+        min-width: 0;
+        gap: 10px;
+      }
+
+      .interview-caption {
+        font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+        padding: 2px 8px;
+      }
+
+      .entrevistas-footer-title {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        align-self: end;
       }
     }
   </style>
@@ -873,7 +1032,7 @@
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
@@ -883,7 +1042,7 @@
       <ul class="desktop-side-nav">
         <li><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
@@ -939,7 +1098,7 @@
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
@@ -949,7 +1108,7 @@
       <ul class="desktop-side-nav">
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
@@ -968,9 +1127,137 @@
   </section>
 
   <!-- 6. SECCIÓN FASHION RUNWAY I _ -->
-  <section class="dark-section fr1-view" id="fr1-view" aria-label="Exposición Fashion Runway I">
+  <section class="dark-section runway-detail-view fr1-view" id="fr1-view" aria-label="Exposición Fashion Runway I">
 
-    <div class="fr1-topbar">
+    <div class="runway-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="runway-gallery-wrap">
+      <div class="runway-carousel" id="fr1-carousel" role="region" aria-label="Galería fotográfica Fashion Runway I">
+        <figure class="runway-slide">
+          <img src="frl 1.png" alt="Fashion Runway I - Fotografía 1" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="runway-slide">
+          <img src="frl 2.png" alt="Fashion Runway I - Fotografía 2" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="runway-slide">
+          <img src="frl 3.png" alt="Fashion Runway I - Fotografía 3" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="runway-slide">
+          <img src="frl 4.png" alt="Fashion Runway I - Fotografía 4" onerror="this.style.display='none';" />
+        </figure>
+      </div>
+    </div>
+
+    <div class="runway-description">
+      <p>
+        En esta edición exponemos a 5 marcas de ropa: Punkstar, Kills, NCK y Basurtto, llevada a cabo el 1 de Agosto de 2025 en el venue, Aparato, en Monterrey, México.
+      </p>
+    </div>
+
+    <h1 class="runway-title">FASHION<br>RUNWAY I _</h1>
+
+  </section>
+
+  <!-- 7. SECCIÓN FASHION RUNWAY II _ (FOTOS ROTADAS 1 GRADO) -->
+  <section class="dark-section runway-detail-view fr2-view" id="fr2-view" aria-label="Exposición Fashion Runway II">
+
+    <div class="runway-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="runway-gallery-wrap">
+      <div class="runway-carousel" id="fr2-carousel" role="region" aria-label="Galería fotográfica Fashion Runway II">
+        <figure class="runway-slide">
+          <img src="frll 1.png" alt="Fashion Runway II - Fotografía 1" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="runway-slide">
+          <img src="frll 2.png" alt="Fashion Runway II - Fotografía 2" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="runway-slide">
+          <img src="frll 3.png" alt="Fashion Runway II - Fotografía 3" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="runway-slide">
+          <img src="frll 4.png" alt="Fashion Runway II - Fotografía 4" onerror="this.style.display='none';" />
+        </figure>
+      </div>
+    </div>
+
+    <div class="runway-description">
+      <p>
+        Segunda edición de nuestra pasarela experimental donde reunimos propuestas emergentes de diseño independiente, llevada a cabo el 19 de Diciembre de 2026 en Monterrey, México.
+      </p>
+    </div>
+
+    <h1 class="runway-title">FASHION<br>RUNWAY II _</h1>
+
+  </section>
+
+  <!-- 8. PESTAÑA ENTREVISTAS_ -->
+  <section class="dark-section entrevistas-view" id="entrevistas-view" aria-label="Sección Entrevistas_">
+
+    <div class="entrevistas-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
         <img
           src="logo au blanco@300x.png"
@@ -985,8 +1272,8 @@
       <!-- Índice superior en móvil con separadores "|" -->
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
@@ -996,8 +1283,8 @@
       <!-- Índice lateral vertical en escritorio -->
       <ul class="desktop-side-nav">
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
-        <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
@@ -1006,33 +1293,46 @@
       </ul>
     </div>
 
-    <!-- Galería con scroll horizontal (4 recuadros) -->
-    <div class="fr1-gallery-wrap">
-      <div class="fr1-carousel" id="fr1-carousel" role="region" aria-label="Galería fotográfica Fashion Runway I">
-        <figure class="fr1-slide">
-          <img src="frl 1.png" alt="Fashion Runway I - Fotografía 1" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="fr1-slide">
-          <img src="frl 2.png" alt="Fashion Runway I - Fotografía 2" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="fr1-slide">
-          <img src="frl 3.png" alt="Fashion Runway I - Fotografía 3" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="fr1-slide">
-          <img src="frl 4.png" alt="Fashion Runway I - Fotografía 4" onerror="this.style.display='none';" />
-        </figure>
+    <div class="entrevistas-stage">
+      <div class="entrevistas-grid">
+        <button type="button" class="interview-card" data-interview="punkstar">
+          <span class="interview-thumb">
+            <img src="e1.jpg" alt="Entrevista Punkstar" onerror="this.style.display='none';" />
+          </span>
+          <span class="interview-caption">Punkstar</span>
+        </button>
+
+        <button type="button" class="interview-card" data-interview="basurtto">
+          <span class="interview-thumb">
+            <img src="e2.jpg" alt="Entrevista Basurtto" onerror="this.style.display='none';" />
+          </span>
+          <span class="interview-caption">Basurtto</span>
+        </button>
+
+        <button type="button" class="interview-card" data-interview="nck">
+          <span class="interview-thumb">
+            <img src="e3.jpg" alt="Entrevista NCK" onerror="this.style.display='none';" />
+          </span>
+          <span class="interview-caption">NCK</span>
+        </button>
+
+        <button type="button" class="interview-card" data-interview="kills">
+          <span class="interview-thumb">
+            <img src="e4.jpg" alt="Entrevista Kills" onerror="this.style.display='none';" />
+          </span>
+          <span class="interview-caption">Kills</span>
+        </button>
+
+        <button type="button" class="interview-card" data-interview="indie-enfants">
+          <span class="interview-thumb">
+            <img src="e5.jpg" alt="Entrevista Indie Enfants" onerror="this.style.display='none';" />
+          </span>
+          <span class="interview-caption">Indie Enfants</span>
+        </button>
       </div>
     </div>
 
-    <!-- Párrafo descriptivo en Owners Medium (500) -->
-    <div class="fr1-description">
-      <p>
-        En esta edición exponemos a 5 marcas de ropa: Punkstar, Kills, NCK y Basurtto, llevada a cabo el 1 de Agosto de 2025 en el venue, Aparato, en Monterrey, México.
-      </p>
-    </div>
-
-    <!-- Título en dos líneas abajo a la izquierda -->
-    <h1 class="fr1-title">FASHION<br>RUNWAY I _</h1>
+    <h1 class="section-footer-title entrevistas-footer-title">Entrevistas_</h1>
 
   </section>
 
@@ -1207,10 +1507,7 @@
     /* ========================================================================
        CARRUSEL HORIZONTAL FLUIDO (TÁCTIL EN iOS/ANDROID + ARRASTRE CON MOUSE)
        ======================================================================== */
-    (() => {
-      const carousel = document.getElementById('fr1-carousel');
-      if (!carousel) return;
-
+    document.querySelectorAll('.runway-carousel').forEach((carousel) => {
       let isMouseDown = false;
       let startX = 0;
       let scrollStart = 0;
@@ -1235,7 +1532,7 @@
         const walk = (x - startX) * 1.4;
         carousel.scrollLeft = scrollStart - walk;
       });
-    })();
+    });
 
     /* ========================================================================
        NAVEGACIÓN Y TRANSICIÓN SÓLIDA DE ABAJO A ARRIBA (SIN DEGRADADO)
@@ -1246,7 +1543,10 @@
       const ticketsView = document.getElementById('tickets-view');
       const exposicionesView = document.getElementById('exposiciones-view');
       const fr1View = document.getElementById('fr1-view');
+      const fr2View = document.getElementById('fr2-view');
+      const entrevistasView = document.getElementById('entrevistas-view');
       const fr1Carousel = document.getElementById('fr1-carousel');
+      const fr2Carousel = document.getElementById('fr2-carousel');
 
       let currentRoute = 'home';
       let isTransitioning = false;
@@ -1256,6 +1556,8 @@
         ticketsView.classList.remove('is-active');
         exposicionesView.classList.remove('is-active');
         fr1View.classList.remove('is-active');
+        fr2View.classList.remove('is-active');
+        entrevistasView.classList.remove('is-active');
 
         if (targetRoute === 'tikets') {
           ticketsView.classList.add('is-active');
@@ -1268,6 +1570,15 @@
         } else if (targetRoute === 'fashion-runway-1') {
           fr1View.classList.add('is-active');
           if (fr1Carousel) fr1Carousel.scrollLeft = 0;
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'fashion-runway-2') {
+          fr2View.classList.add('is-active');
+          if (fr2Carousel) fr2Carousel.scrollLeft = 0;
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'entrevistas') {
+          entrevistasView.classList.add('is-active');
           document.body.style.backgroundColor = '#000000';
           GraffitiEngine.disable();
         } else {
@@ -1312,7 +1623,7 @@
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const route = link.dataset.route;
-          if (route === 'tikets' || route === 'exposiciones') {
+          if (route === 'tikets' || route === 'exposiciones' || route === 'entrevistas') {
             navigateTo(route);
           }
         });
@@ -1337,7 +1648,7 @@
       document.querySelectorAll('.expo-item-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const route = btn.dataset.route;
-          if (route === 'fashion-runway-1') {
+          if (route === 'fashion-runway-1' || route === 'fashion-runway-2') {
             navigateTo(route);
           }
         });
