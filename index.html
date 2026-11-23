@@ -20,6 +20,7 @@
       --ink-white: #ffffff;
       --accent-yellow: #f3e600;
       --frame-border: 14px;
+      --flyer-tilt: 2.862deg;
 
       --font-index: 'akzidenz-grotesk-next-pro', 'Akzidenz-Grotesk Next Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       --font-body: 'owners', 'Owners', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -67,7 +68,6 @@
       z-index: 2;
       width: 100%;
       height: 100dvh;
-      /* Permite que clics y arrastres en espacios libres lleguen al canvas */
       pointer-events: none;
       -webkit-user-select: none;
       user-select: none;
@@ -115,7 +115,7 @@
       pointer-events: auto;
     }
 
-    /* La barra amarilla entra en seco (sin transition) */
+    /* La barra amarilla entra en seco (sin transición) */
     .nav-link {
       display: inline-block;
       text-decoration: none;
@@ -256,7 +256,7 @@
     }
 
     /* ==========================================================================
-       5. PESTAÑA TIKETS_ (FONDO NEGRO, TEXTO BLANCO, FRANJA AMARILLA -> BLANCO)
+       5. PESTAÑA TIKETS_ (SIN SCROLL EN MÓVIL, TODO VISIBLE DE UN VISTAZO)
        ========================================================================== */
     .tickets-view {
       position: fixed;
@@ -267,46 +267,50 @@
       background-color: var(--bg-black);
       color: var(--ink-white);
       display: none;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
       padding:
-        calc(22px + env(safe-area-inset-top))
-        calc(22px + env(safe-area-inset-right))
-        calc(28px + env(safe-area-inset-bottom))
-        calc(22px + env(safe-area-inset-left));
+        calc(14px + env(safe-area-inset-top))
+        calc(18px + env(safe-area-inset-right))
+        calc(16px + env(safe-area-inset-bottom))
+        calc(18px + env(safe-area-inset-left));
     }
 
+    /* En móvil: Logo arriba -> Bloque Comprar arriba de la foto -> Flyer -> Tikets_ abajo */
     .tickets-view.is-active {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 24px;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* Columna izquierda: Logo blanco + índice compacto */
-    .tickets-sidebar {
+    .tickets-topbar {
+      width: 100%;
       display: flex;
-      flex-direction: column;
       align-items: flex-start;
-      gap: 18px;
+      justify-content: space-between;
+      flex-shrink: 0;
     }
 
     .tickets-logo {
+      background: none;
+      border: none;
+      padding: 0;
       display: inline-block;
-      text-decoration: none;
       cursor: pointer;
     }
 
     .tickets-logo img {
       display: block;
-      width: clamp(92px, 24vw, 128px);
+      width: clamp(78px, 21vw, 118px);
       height: auto;
       object-fit: contain;
     }
 
+    /* Menú compacto vertical en móvil (oculto en la parte superior móvil para dar espacio al bloque Comprar y Flyer) */
     .tickets-mini-nav {
+      display: none;
       list-style: none;
-      display: flex;
       flex-direction: column;
       gap: 2px;
     }
@@ -318,43 +322,45 @@
       text-align: left;
       font-family: var(--font-index);
       font-weight: 500;
-      font-size: clamp(0.82rem, 2.8vw, 0.95rem);
+      font-size: 0.92rem;
       line-height: 1.2;
       letter-spacing: -0.02em;
       color: var(--ink-white);
       cursor: pointer;
     }
 
-    .tickets-mini-link.is-current {
-      color: var(--accent-yellow);
-    }
-
+    .tickets-mini-link.is-current,
     .tickets-mini-link:hover,
     .tickets-mini-link:active {
       color: var(--accent-yellow);
     }
 
-    /* Centro / Derecha: Evento + Botón COMPRAR + Fecha + Flyer */
+    /* Contenedor central: en móvil ordena Comprar encima de la imagen */
     .tickets-stage {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 22px;
-      width: 100%;
+      justify-content: center;
+      gap: clamp(10px, 2vh, 22px);
     }
 
     .event-cta-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
       text-align: center;
+      flex-shrink: 0;
     }
 
     .event-title {
       font-family: var(--font-index);
       font-weight: 500;
-      font-size: clamp(1.35rem, 5vw, 2.1rem);
+      font-size: clamp(1.1rem, 4.4vw, 1.95rem);
+      line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--ink-white);
     }
@@ -364,15 +370,17 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
       background-color: var(--accent-yellow);
       color: var(--ink-black);
       border: none;
       cursor: pointer;
       font-family: var(--font-index);
       font-weight: 500;
-      font-size: clamp(1.3rem, 4.8vw, 1.95rem);
+      font-size: clamp(1.05rem, 4.2vw, 1.85rem);
+      line-height: 1.1;
       letter-spacing: -0.02em;
-      padding: 4px 22px;
+      padding: 3px 18px;
       transition: none;
     }
 
@@ -387,63 +395,77 @@
     .event-date {
       font-family: var(--font-index);
       font-weight: 500;
-      font-size: clamp(1.2rem, 4.4vw, 1.8rem);
+      font-size: clamp(1rem, 4vw, 1.75rem);
+      line-height: 1.15;
       letter-spacing: -0.02em;
       color: var(--ink-white);
     }
 
-    /* Contenedor listo para FLYER PARED-06.png */
+    /* Marco que garantiza que la imagen inclinada quepa completa sin recortarse */
     .flyer-frame {
-      width: min(82vw, 390px);
-      aspect-ratio: 1 / 1.05;
-      background-color: var(--ink-white);
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      max-width: 340px;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      padding: 14px;
     }
 
     .flyer-frame img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
       display: block;
+      transform: rotate(var(--flyer-tilt));
+      transform-origin: center center;
     }
 
     /* Título grande Tikets_ inferior */
     .tickets-footer-title {
       font-family: var(--font-index);
       font-weight: 500;
-      font-size: clamp(2.6rem, 11vw, 4.6rem);
-      line-height: 1;
+      font-size: clamp(2.1rem, 9.5vw, 4.5rem);
+      line-height: 0.98;
       letter-spacing: -0.03em;
       color: var(--ink-white);
       align-self: flex-start;
+      flex-shrink: 0;
     }
 
     /* Vista escritorio (>= 900px) fiel a la referencia horizontal */
     @media (min-width: 900px) {
       .tickets-view.is-active {
         display: grid;
-        grid-template-columns: 180px 1fr 240px;
+        grid-template-columns: 170px 1fr 230px;
         grid-template-rows: 1fr auto;
         align-items: center;
-        padding: 36px 44px;
-        gap: 24px 36px;
-        overflow: hidden;
+        padding: 34px 42px;
+        gap: 20px 36px;
       }
 
-      .tickets-sidebar {
+      .tickets-topbar {
         grid-column: 1;
         grid-row: 1;
-        align-self: start;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .tickets-mini-nav {
+        display: flex;
       }
 
       .tickets-stage {
         grid-column: 2 / 4;
         grid-row: 1;
+        height: 100%;
         display: grid;
-        grid-template-columns: 1fr 240px;
+        grid-template-columns: 1fr 230px;
         align-items: center;
         justify-items: center;
         gap: 32px;
@@ -451,12 +473,15 @@
 
       .flyer-frame {
         grid-column: 1;
-        width: min(38vw, 440px);
-        max-height: 76dvh;
+        height: 100%;
+        max-height: 74dvh;
+        max-width: 480px;
+        padding: 20px;
       }
 
       .event-cta-box {
         grid-column: 2;
+        gap: 8px;
       }
 
       .tickets-footer-title {
@@ -520,7 +545,7 @@
   <!-- 4. PESTAÑA TIKETS_ -->
   <section class="tickets-view" id="tickets-view" aria-label="Sección Tikets_">
 
-    <div class="tickets-sidebar">
+    <div class="tickets-topbar">
       <!-- Logo blanco en PNG (clic/tap vuelve a la Home) -->
       <button type="button" class="tickets-logo" id="back-to-home-btn" aria-label="Volver a inicio">
         <img
@@ -533,7 +558,7 @@
         </span>
       </button>
 
-      <!-- Índice rápido lateral -->
+      <!-- Índice rápido lateral en escritorio -->
       <ul class="tickets-mini-nav">
         <li><button type="button" class="tickets-mini-link is-current" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="tickets-mini-link" data-route="home">Exposiciones_</button></li>
@@ -547,23 +572,29 @@
     </div>
 
     <div class="tickets-stage">
-      <!-- Imagen del flyer lista para vincular -->
+      <!-- Bloque de compra (en móvil va arriba de la foto; en escritorio a la derecha) -->
+      <div class="event-cta-box">
+        <h2 class="event-title">Expo II _</h2>
+        <a
+          href="https://www.tikzet.com/events/fashion-runway"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="buy-btn"
+          id="buy-ticket-btn"
+        >COMPRAR</a>
+        <p class="event-date">19 / 12 / 26</p>
+      </div>
+
+      <!-- Imagen del flyer completa con inclinación de 2.862° -->
       <div class="flyer-frame">
         <img
           src="FLYER PARED-06.png"
           alt="Flyer Expo II Fashion Runway"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
         />
-        <span style="display:none; color:#000000; font-family:var(--font-index); font-weight:500; font-size:0.95rem; padding:16px; text-align:center;">
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:0.95rem; padding:16px; text-align:center;">
           FLYER PARED-06.png
         </span>
-      </div>
-
-      <!-- Información del evento y botón COMPRAR -->
-      <div class="event-cta-box">
-        <h2 class="event-title">Expo II _</h2>
-        <button type="button" class="buy-btn" id="buy-ticket-btn">COMPRAR</button>
-        <p class="event-date">19 / 12 / 26</p>
       </div>
     </div>
 
@@ -747,7 +778,6 @@
       const homeView = document.getElementById('home-view');
       const ticketsView = document.getElementById('tickets-view');
       const backHomeBtn = document.getElementById('back-to-home-btn');
-      const buyBtn = document.getElementById('buy-ticket-btn');
 
       let isTransitioning = false;
 
@@ -757,7 +787,7 @@
 
         // 1. Sube el telón negro sólido desde abajo
         wipe.classList.remove('is-leaving');
-        void wipe.offsetWidth; // Reflow forzado para reiniciar la posición
+        void wipe.offsetWidth;
         wipe.classList.add('is-rising');
 
         setTimeout(() => {
@@ -789,7 +819,6 @@
         }, 340);
       }
 
-      // Enlaces del índice principal en la Home
       document.querySelectorAll('.nav-link').forEach((link) => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
@@ -800,7 +829,6 @@
         });
       });
 
-      // Volver a la Home desde el logo blanco o enlaces laterales en Tikets_
       backHomeBtn.addEventListener('click', () => navigateTo('home'));
 
       document.querySelectorAll('.tickets-mini-link').forEach((btn) => {
@@ -809,11 +837,6 @@
             navigateTo('home');
           }
         });
-      });
-
-      // Acción lista para conectar tu link/pasarela de boletos de Expo II
-      buyBtn.addEventListener('click', () => {
-        // Ejemplo: window.open('TU_LINK_DE_BOLETOS', '_blank', 'noopener,noreferrer');
       });
     })();
   </script>
