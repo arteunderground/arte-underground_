@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motor de Grafiti</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    #graffiti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    #clear-spray-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      z-index: 10;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      padding: 4px 10px;
+      background-color: #000000;
+      color: #FFE600;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, background-color 0.15s ease, color 0.15s ease;
+    }
+
+    #clear-spray-btn.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #clear-spray-btn:hover {
+      background-color: #FFE600;
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="graffiti-canvas" aria-label="Lienzo de grafiti con aerosol"></canvas>
+  <button id="clear-spray-btn" type="button" title="Limpiar trazos de grafiti (Tecla C)">
+    Limpiar muro_
+  </button>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('graffiti-canvas');
+      const ctx = canvas.getContext('2d');
+      const clearBtn = document.getElementById('clear-spray-btn');
+
+      function resizeCanvas() {
+        const dpr = window.devicePixelRatio || 1;
+        const temp = document.createElement('canvas');
+        temp.width = canvas.width;
+        temp.height = canvas.height;
+
+        if (canvas.width > 0 && canvas.height > 0) {
+          temp.getContext('2d').drawImage(canvas, 0, 0);
+        }
+
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+
+        if (temp.width > 0 && temp.height > 0) {
+          ctx.drawImage(temp, 0, 0, temp.width / dpr, temp.height / dpr);
+        }
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      let isSpraying = false;
+      let lastX = 0;
+      let lastY = 0;
+      let hasPaint = false;
+      let currentSprayColor = '#0a0a0a';
+      const sprayPalette = ['#0a0a0a', '#141414', '#FFE600', '#0a0a0a', '#0a0a0a'];
+      let strokeCount = 0;
+
+      function revealClearButton() {
+        if (!hasPaint) {
+          hasPaint = true;
+          clearBtn.classList.add('is-visible');
+        }
+      }
+
+      function clearSpray() {
+        const dpr = window.devicePixelRatio || 1;
+        ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+        hasPaint = false;
+        clearBtn.classList.remove('is-visible');
+      }
+
+      function sprayAt(x, y, speed = 0) {
+        const baseRadius = Math.max(11, 21 - Math.min(speed * 0.25, 8));
+        const density = Math.floor(baseRadius * 4.4);
+
+        for (let i = 0; i < density; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const dist = Math.pow(Math.random(), 1.65) * baseRadius;
+          const px = x + Math.cos(angle) * dist;
+          const py = y + Math.sin(angle) * dist;
+          const alpha = (1 - dist / baseRadius) * (0.35 + Math.random() * 0.5);
+          const dotSize = Math.random() < 0.78 ? 1.15 : 2.1;
+
+          ctx.fillStyle = currentSprayColor;
+          ctx.globalAlpha = alpha;
+          ctx.fillRect(px, py, dotSize, dotSize);
+        }
+
+        if (speed < 3.5 && Math.random() < 0.045) {
+          const dripLength = 10 + Math.random() * 34;
+          const dripX = x + (Math.random() - 0.5) * 8;
+          let currentDripY = y;
+
+          const stepDrip = () => {
+            if (currentDripY - y < dripLength) {
+              ctx.globalAlpha = 0.65;
+              ctx.fillStyle = currentSprayColor;
+              ctx.beginPath();
+              ctx.arc(dripX, currentDripY, 1.35, 0, Math.PI * 2);
+              ctx.fill();
+              currentDripY += 1.6;
+              requestAnimationFrame(stepDrip);
+            }
+          };
+
+          requestAnimationFrame(stepDrip);
+        }
+
+        ctx.globalAlpha = 1;
+        revealClearButton();
+      }
+
+      function sprayLine(x0, y0, x1, y1) {
+        const dx = x1 - x0;
+        const dy = y1 - y0;
+        const distance = Math.hypot(dx, dy);
+        const steps = Math.max(1, Math.floor(distance / 2.2));
+
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          sprayAt(x0 + dx * t, y0 + dy * t, distance);
+        }
+      }
+
+      canvas.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0 && e.pointerType === 'mouse') return;
+        isSpraying = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        currentSprayColor = sprayPalette[strokeCount % sprayPalette.length];
+        strokeCount++;
+        canvas.setPointerCapture(e.pointerId);
+        sprayAt(lastX, lastY, 0);
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!isSpraying) return;
+        sprayLine(lastX, lastY, e.clientX, e.clientY);
+        lastX = e.clientX;
+        lastY = e.clientY;
+      });
+
+      const stopSpraying = (e) => {
+        if (!isSpraying) return;
+        isSpraying = false;
+        try {
+          canvas.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+      };
+
+      canvas.addEventListener('pointerup', stopSpraying);
+      canvas.addEventListener('pointercancel', stopSpraying);
+
+      clearBtn.addEventListener('click', clearSpray);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'c' || e.key === 'C') {
+          clearSpray();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
