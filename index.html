@@ -805,7 +805,7 @@
     }
 
     /* ==========================================================================
-       9. PESTAÑA ENTREVISTAS_ (MÓVIL + DESKTOP)
+       9. PESTAÑA ENTREVISTAS_ (ÍNDICE DE MARCAS)
        ========================================================================== */
     .entrevistas-view.is-active {
       display: flex;
@@ -960,7 +960,243 @@
     }
 
     /* ==========================================================================
-       10. PESTAÑA QUIÉN SOMOS_ (MÓVIL + DESKTOP)
+       10. DETALLE DE ENTREVISTA INDIVIDUAL (MÓVIL + DESKTOP)
+       ========================================================================== */
+    .interview-detail-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .interview-detail-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    /* Bloque de foto con swipe horizontal + 5 puntos amarillos */
+    .interview-media-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .interview-slider-track {
+      width: min(44vw, 185px);
+      height: min(31dvh, 245px);
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      cursor: grab;
+      scrollbar-width: none;
+    }
+
+    .interview-slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .interview-slider-track.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    .interview-photo-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-yellow);
+      scroll-snap-align: start;
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .interview-photo-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .interview-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .interview-dot {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      padding: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: rgba(243, 230, 0, 0.35);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .interview-dot.is-active {
+      background-color: var(--accent-yellow);
+      transform: scale(1.22);
+    }
+
+    /* Contenedor de lectura con scroll vertical */
+    .interview-text-col {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-yellow) transparent;
+    }
+
+    .interview-text-col::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .interview-text-col::-webkit-scrollbar-thumb {
+      background-color: var(--accent-yellow);
+    }
+
+    .interview-mobile-subtitle {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(0.95rem, 4vw, 1.15rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink-white);
+      margin-bottom: 10px;
+    }
+
+    .interview-body-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-bottom: 12px;
+    }
+
+    /* Párrafos justificados en Owners Bold */
+    .interview-body-stack p {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(0.88rem, 3.65vw, 1.02rem);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      color: var(--ink-white);
+      text-align: justify;
+      text-align-last: left;
+    }
+
+    .interview-body-stack p.interview-question {
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.78);
+      margin-bottom: -6px;
+    }
+
+    /* Título grande abajo a la izquierda en itálica (ej. Punkstar_) */
+    .interview-footer-title {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-style: italic;
+      font-size: clamp(2.2rem, 9.8vw, 4.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 900px) {
+      .interview-detail-view.is-active {
+        display: grid;
+        grid-template-columns: 185px minmax(260px, 340px) 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 48px 34px 42px;
+        gap: 20px 44px;
+      }
+
+      .interview-detail-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .interview-media-col {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+        justify-self: center;
+        width: 100%;
+        gap: 10px;
+      }
+
+      .interview-slider-track {
+        width: 100%;
+        height: min(60dvh, 470px);
+      }
+
+      .interview-dot {
+        width: 7px;
+        height: 7px;
+      }
+
+      .interview-mobile-subtitle {
+        display: none;
+      }
+
+      .interview-text-col {
+        grid-column: 3;
+        grid-row: 1 / 3;
+        max-width: 650px;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding-top: 26px;
+        padding-right: 16px;
+        padding-bottom: 24px;
+      }
+
+      .interview-body-stack {
+        gap: 22px;
+      }
+
+      .interview-body-stack p {
+        font-size: clamp(1.12rem, 1.48vw, 1.42rem);
+        line-height: 1.22;
+      }
+
+      .interview-footer-title {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        align-self: end;
+        font-size: clamp(3.1rem, 4.5vw, 4.3rem);
+      }
+    }
+
+    /* ==========================================================================
+       11. PESTAÑA QUIÉN SOMOS_ (ACOMODO DIAGONAL + JUSTIFICADO EN TODAS LAS LÍNEAS)
        ========================================================================== */
     .quienes-view.is-active {
       display: flex;
@@ -985,7 +1221,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: clamp(14px, 2.4vh, 24px);
       overflow-y: auto;
       scrollbar-width: none;
     }
@@ -994,37 +1229,41 @@
       display: none;
     }
 
-    .quienes-stack {
+    .quienes-diagonal {
       width: 100%;
-      max-width: 310px;
+      max-width: 315px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: clamp(14px, 2.4vh, 22px);
+      gap: clamp(12px, 2vh, 20px);
     }
 
     .quienes-block {
       font-family: var(--font-index);
       font-weight: 500;
-      font-size: clamp(0.9rem, 3.85vw, 1.06rem);
-      line-height: 1.06;
-      letter-spacing: -0.025em;
+      font-size: clamp(0.84rem, 3.6vw, 1rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
       color: var(--ink-white);
+      text-align: justify;
+      text-align-last: justify;
     }
 
     .quienes-block-1 {
-      padding-left: 0;
-      max-width: 245px;
+      align-self: flex-start;
+      width: 74%;
     }
 
     .quienes-block-2 {
-      padding-left: clamp(24px, 9vw, 44px);
-      max-width: 275px;
+      align-self: flex-start;
+      margin-left: 13%;
+      width: 78%;
     }
 
     .quienes-block-3 {
-      padding-left: clamp(48px, 16vw, 76px);
-      max-width: 295px;
+      align-self: flex-start;
+      margin-left: 26%;
+      width: 74%;
     }
 
     .quienes-ig-row {
@@ -1080,34 +1319,36 @@
         height: 100%;
         overflow: hidden;
         justify-content: center;
-        padding-left: clamp(24px, 4vw, 72px);
       }
 
-      .quienes-stack {
-        max-width: none;
+      .quienes-diagonal {
+        max-width: 780px;
         width: 100%;
-        margin: 0;
-        gap: clamp(22px, 3.6vh, 42px);
+        margin: 0 auto;
+        gap: clamp(20px, 3.2vh, 36px);
       }
 
       .quienes-block {
-        font-size: clamp(1.3rem, 1.85vw, 1.95rem);
-        line-height: 1.04;
+        font-size: clamp(1.22rem, 1.68vw, 1.72rem);
+        line-height: 1.06;
       }
 
       .quienes-block-1 {
-        padding-left: 0;
-        max-width: 440px;
+        align-self: flex-start;
+        margin-left: 0;
+        width: 54%;
       }
 
       .quienes-block-2 {
-        padding-left: clamp(90px, 11vw, 175px);
-        max-width: 580px;
+        align-self: flex-start;
+        margin-left: 20%;
+        width: 58%;
       }
 
       .quienes-block-3 {
-        padding-left: clamp(170px, 20vw, 310px);
-        max-width: 640px;
+        align-self: flex-start;
+        margin-left: 40%;
+        width: 56%;
       }
 
       .quienes-ig-row {
@@ -1421,7 +1662,7 @@
 
   </section>
 
-  <!-- 8. PESTAÑA ENTREVISTAS_ -->
+  <!-- 8. PESTAÑA ENTREVISTAS_ (ÍNDICE) -->
   <section class="dark-section entrevistas-view" id="entrevistas-view" aria-label="Sección Entrevistas_">
 
     <div class="entrevistas-topbar">
@@ -1501,7 +1742,61 @@
 
   </section>
 
-  <!-- 9. PESTAÑA QUIÉN SOMOS_ -->
+  <!-- 9. DETALLE DE ENTREVISTA INDIVIDUAL (PUNKSTAR, BASURTTO, NCK, KILLS, INDIE ENFANTS) -->
+  <section class="dark-section interview-detail-view" id="interview-detail-view" aria-label="Detalle de entrevista">
+
+    <div class="interview-detail-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <!-- Carrusel de 5 fotos con swipe horizontal + autoplay cada 5 segundos + puntos -->
+    <div class="interview-media-col">
+      <div class="interview-slider-track" id="interview-slider-track" role="region" aria-label="Galería de entrevista"></div>
+      <div class="interview-dots" id="interview-dots" role="tablist" aria-label="Seleccionar fotografía"></div>
+    </div>
+
+    <!-- Texto justificado con Owners Bold + scroll vertical -->
+    <div class="interview-text-col" id="interview-text-col">
+      <h2 class="interview-mobile-subtitle" id="interview-mobile-subtitle">Punkstar</h2>
+      <div class="interview-body-stack" id="interview-body-stack"></div>
+    </div>
+
+    <!-- Título inferior en itálica con guión bajo -->
+    <h1 class="interview-footer-title" id="interview-footer-title">Punkstar_</h1>
+
+  </section>
+
+  <!-- 10. PESTAÑA QUIÉN SOMOS_ -->
   <section class="dark-section quienes-view" id="quienes-view" aria-label="Sección Quién Somos_">
 
     <div class="quienes-topbar">
@@ -1539,17 +1834,17 @@
     </div>
 
     <div class="quienes-stage">
-      <div class="quienes-stack">
+      <div class="quienes-diagonal">
         <p class="quienes-block quienes-block-1">
-          Somos una plataforma de arte dedicada a producir exposiciones artísticas y a alzar la voz por problemas sociales[cite: 6, 7].
+          Somos una plataforma de arte dedicada a producir exposiciones artísticas y a alzar la voz por problemas sociales.
         </p>
 
         <p class="quienes-block quienes-block-2">
-          Fundado en Monterrey 2025 con la creencia de que el arte debe de fomentarse libre del yugo coorporativo, y ser autogestivos[cite: 6, 7].
+          Fundado en Monterrey 2025 con la creencia de que el arte debe de fomentarse libre del yugo coorporativo, y ser autogestivos.
         </p>
 
         <p class="quienes-block quienes-block-3">
-          Nuestra plataforma busca darle un lugar a los artistas underground sin importar estadísticas ni estéticas[cite: 6, 7].
+          Nuestra plataforma busca darle un lugar a los artistas underground sin importar estadísticas ni estéticas.
         </p>
       </div>
     </div>
@@ -1569,6 +1864,121 @@
   </section>
 
   <script>
+    /* ========================================================================
+       BASE DE DATOS DE ENTREVISTAS (FOTOS + PÁRRAFOS)
+       ======================================================================== */
+    const INTERVIEWS_DATA = {
+      'punkstar': {
+        name: 'Punkstar',
+        photos: ['pk1.png', 'pk2.png', 'pk3.png', 'pk4.png', 'pk5.png'],
+        blocks: [
+          { type: 'body', text: 'Nuestro arte nace de la sensibilidad con la que percibimos el mundo. De sentir demasiado y no saber contenerlo.' },
+          { type: 'body', text: 'Más que una emoción fija, buscamos generar algo que conecte profundo y despierte algo real en quien lo recibe.' },
+          { type: 'body', text: 'Nuestro arte es del mundo para el mundo, no tiene residencia ni permanencia, se refleja en quién lo puede sentir.' },
+          { type: 'body', text: 'Vivimos en un mundo saturado de opiniones, estimulos y voces externas que muchas veces nublan quienes somos realmente ""Con nuestro trabajo, queremos abrir una brecha, un espacio de pausa y reflexión.' },
+          { type: 'body', text: 'No buscamos dar respuestas concretas, sino abrir espacios para que cada quien encuentre su propio sentido."' },
+          { type: 'question', text: '¿Qué referencia siempre vuelve a ti, aunque no quieras? (puede ser un artista, un recuerdo, un lugar...)' },
+          { type: 'body', text: 'Pink Floyd' },
+          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Cuál sería?' },
+          { type: 'body', text: '“Popper”' },
+          { type: 'question', text: '¿Qué parte de tu identidad no se puede separar de lo que haces?' },
+          { type: 'body', text: 'La sensibilidad extrema.' },
+          { type: 'body', text: 'No siempre saber gos que estamos buscando. A veces es une emoción que se nos desborda a veces es un silencio que necesita cuérpo." No seguimes armulas ni pedimos permiso: hacemos lo que nos nace, lo que nos duele, lo que se siente gente.' },
+          { type: 'body', text: 'No buscamos ser recordados, solo que se note que fue honesto, que vino de alguien que sintió de verdad. Y que tal vez, inspire a otros a ser más ellos mismos."' }
+        ]
+      },
+      'basurtto': {
+        name: 'Basurtto',
+        photos: ['bt1.png', 'bt2.png', 'bt3.png', 'bt4.png', 'bt5.png'],
+        blocks: [
+          { type: 'body', text: '"Siempre busco cambio. Pienso que puedes dejar algo bueno en las personas mientras te liberas de ti mismo.' },
+          { type: 'body', text: 'Todo lo que hago es persona y una declaración. El romance y lo poético también puede ser un poco caotico.' },
+          { type: 'body', text: 'El ser mío es ser contradictorio siempre, así que siempre estare en contra de algo. Quiero gritar. "Me gusta la delicadeza del ser pero también la ira es parte de lo que soy.' },
+          { type: 'body', text: '"Siempre me siento vulnerable, como si vieran por dentro de mi, a veces se siente aterrador pero lo disfruto también."' },
+          { type: 'body', text: '"Mi inspiración siempre es de como he experimentado mi vida, la música es algo mu esencial para mí, todo lo que veo y siento. Tu mente en algún punto quiere mater alizar lo que has sentido alguna vez en tu vida."' },
+          { type: 'body', text: '"El arte debería no ser capitalista. Puede pertenecer donde sea y puede ser de quien sea. Si no es así entonces solo es simplemente algo material sin amor ni propósito."' },
+          { type: 'body', text: '"Muchas cosas las tengoclaras pero gurn somos jovenes. Hay cosas que ya no significan nada y otras que significaran mucho Quiero que las personas puedan encontrar algún sentimiento en lo que hago.' },
+          { type: 'question', text: '¿Qué pasa con tu obra cuando pasa el tiempo? ¿Envejece, se transforma, desaparece:..?' },
+          { type: 'body', text: '"El valor siempre está. Es como cuando aprendes algo nuevo, no puedes quitarle el valor a tus ideas porque en algún momento estuviste ahí."' },
+          { type: 'question', text: '¿Que silencio quieres romper con tu trabajo?' },
+          { type: 'body', text: '"El hacer lo que hago habla por sí mismo. Lo que hacemos de cierta manera ya es anti sistema."' },
+          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Quál sería?' },
+          { type: 'body', text: '"Más que eso, una sensación. Seria cuando el viento roza delicadamente tu rostro y despeina tu cabello.' },
+          { type: 'body', text: '"Habrá personas como yo, que busquen la libertad como yo lo hago, que amen como yo, que busquen el sentir y es donde lo que creo será algo sigrificativo.' }
+        ]
+      },
+      'nck': {
+        name: 'NCK',
+        photos: ['nk1.png', 'nk2.png', 'nk3.png', 'nk4.png', 'nk5.png'],
+        blocks: [
+          { type: 'body', text: '"Cada prenda que creo es un puente a mi niñez, donde la imaginación mandaba y todo era posible.' },
+          { type: 'body', text: '"Mi arte pertenece en los bordes: donde las calles se encuentran con las redes, y el ruido se mezcla con el silencio, es un espacio líquido, que se mueve entre lo público y lo íntimo, siempre buscando romper límites y conectar con lo inesperado.' },
+          { type: 'body', text: '"A través de mi trabajo aprendí que mi fuerza está en la vulnerabilidad y en abrazar lo imperfecto." "El error y el accidente son el pulso vital de mi creación, son las grietas por donde entra la luz, las sorpresas que transforman lo previsto en algo nuevo auténtico.' },
+          { type: 'question', text: '¿En qué momento sabes que tu obra está terminada?' },
+          { type: 'body', text: '"Una obra está terminada cuando deja de ser solo mía y empieza a ser de quienes la miran. Cuando ya no busco perfección, sino conexión.' },
+          { type: 'body', text: '"Quiero reparar la fragilidad oculta de quienes se sienten invisibles, denunciar la rigidez de un sistema que aplasta la diversidad y celebrar la fuerza indomable de la diferencia que transforma el mundo." "Quiero romper el silencio de la conformidad y el miedo, ese que calla las verdades incómodas y apaga las voces autenticas.' },
+          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Cuái sería?' },
+          { type: 'body', text: '"Amargo y picante, como un café negro con un toque de chile... inesperado y despierta los sentidos.' },
+          { type: 'question', text: '¿Qué conflicto o pregunta sigue viva en tu obra, incluso sin resolver?' },
+          { type: 'body', text: '¿Cómo podemos ser libres en un mundo que constantemente nos quiere encasillar? Ese conflicto entre pertenecer y romper, entre mostrar y esconder, impulsa cada creación y mantiene el fuego encendido.' },
+          { type: 'body', text: 'Crear no es solo una acción, es mi esencia. Si dejara de crear, perdería mi voz más profunda, esa que me impulsa a cuestionar, soñar y transformar, sin la creación, el mundo se volvería más silencioso para mí. Crear es existir en libertad."' },
+          { type: 'question', text: '¿Hay alguna idea que aun no te animas a hacer?' },
+          { type: 'body', text: 'Yo nunca me quedo con las ganas, yo siempre me animo a hacerlo.' },
+          { type: 'question', text: '¿Qué estás tratando de decir sin decirlo directamente mediante tus obras?' },
+          { type: 'body', text: 'No vestimos cuerpos, vestimos ideas. Somos arte que incomoda, moda que habla. Cuestionamos lo normal, celebramos lo raro. Nuestra ropa no busca agradar, busca despertar.' },
+          { type: 'question', text: '¿Qué parte de ti se revela solo cuando creas?' },
+          { type: 'body', text: '\'La parte más cruda y vulnerable de mí, esa que no siempre se muestra pero que encuentra en la creación un espacio seguro para expresarse. Es donde la autenticidad florece y la 0 verdad personal toma forma.' },
+          { type: 'body', text: 'Me gustaría que mi arte siga siendo una voz que despierte, un fuego que no se apague, y un espacio para que otros encuentren libertad para expresarse." "Como la memoria que se adapta y se reinventa, mi arte muta con el tiempo, se resignifica en cada mirada nueva, y nunca desaparece, porque vive en la experiencia de quien la encuentra.' }
+        ]
+      },
+      'kills': {
+        name: 'Kills',
+        photos: ['k1.png', 'k2.png', 'k3.png', 'k4.png', 'k5.png'],
+        blocks: [
+          { type: 'body', text: 'No quiero que busquen mi nombre, quiero que se sienta y dejarlo fatuado, encuéntrenme sin buscarme, welcome to the kills world."' },
+          { type: 'body', text: 'KILL' },
+          { type: 'body', text: 'Kills no se crea ni se destruye, solo se transforma.' },
+          { type: 'body', text: 'Mi arte va de la necesidad de tener una voz, quiero que mi existencia tenga eco, quiero que sepan que yo estuve aquí, ahí y allá.' },
+          { type: 'body', text: 'Busco un universo, busco crear fantasía desde historias no escritas, me inspira todo lo que incomoda, lo que no debería estar ahí o que rompe la lógica, busco mover mi caos y hacer ne con ello.' },
+          { type: 'body', text: 'Mis inspiraciones siempre vienen desde lo más cotidiano, desde la estética de una película, la textura que vi en la calle, la sabana vieja que vi en el mercado, mi canción favorita de la infancia, un musical de broadway...' },
+          { type: 'question', text: '¿Qué referencia siempre vuelve a ti, aunque no quieras? (puede ser un artista, un recuerdo, un lugar...)' },
+          { type: 'body', text: 'The Rocky Horror Picture Show' },
+          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. Cual sería?' },
+          { type: 'body', text: 'Tierra mojada.' },
+          { type: 'question', text: '¿Qué cambiaría de ti si dejaras de crear?' },
+          { type: 'body', text: 'Moriría.' },
+          { type: 'question', text: '¿Hay una emoción o estado que buscás generar cada vez que creás?' },
+          { type: 'body', text: 'Just unbothered coolness.' },
+          { type: 'question', text: 'Hay una palabra que se repita en tu cabeza cuando estás creando?' },
+          { type: 'body', text: 'Freak' },
+          { type: 'body', text: 'Podemos encontrar belleza y uncionalidad en cualquier lado, admirar con los ojos correctos te hace poder crea desde lo que sea.\'Crear desde lo accidental permite la transformación.' }
+        ]
+      },
+      'indie-enfants': {
+        name: 'Indie Enfants',
+        photos: ['ie1.png', 'ie2.png', 'ie3.png', 'ie4.png', 'ie5.png'],
+        blocks: [
+          { type: 'body', text: '"Quiero mis piezas sean eídas como mi diario, personal; que emitan todo lo que siento sin tener que usar palabras como la música de badbadnotgood."' },
+          { type: 'body', text: '"Siempre recurro al recuerdo de mi infancia en el extranjero; de mi niñez en Romania viendo nieve caer por primera vez o de mis días de preadolescente en una pequeña ciudad cerca de Buenos Aires. No solo por la experiencia, sino, por la complejidad de sentimientos que conllevo."' },
+          { type: 'body', text: '"Quiero que mis piezas emanen nostalgia pero una nostalgia tranquila como esa que sientes cuando por fin sanas algo que pensaste que por siempre dolería; la calma despues de la tormenta.' },
+          { type: 'question', text: '¿Que lugar ocupa el error o el accidente en tu proceso creativo?' },
+          { type: 'body', text: '"Los errores son inevitables, en especial en el proceso de crear ropa. Es muy difícil que me quede con el primer draft de mis ideas; venus siempre hay lugar para mejorar."' },
+          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una texturaketc. ¿Cuál sería?' },
+          { type: 'body', text: 'Want You To Love Me de Fiona Apple' },
+          { type: 'question', text: '*Qué parte de tu identidad no se puede separar de lo que haces?' },
+          { type: 'body', text: '"Mi naturaleza melancólica. Mis piezas siempre (o por ahora) nacerán de mis recuerdos y de mis experiencias."' },
+          { type: 'question', text: '¿Hay una palabra que se repita en tu cabeza cuando estas creando?' },
+          { type: 'body', text: 'Epifanía.' },
+          { type: 'body', text: 'Quiero crear, crear y crear hasta que la vida no me lo permita.' },
+          { type: 'question', text: '¿Qué cambiaría de ti si dejaras de crear?' },
+          { type: 'body', text: 'No me veo aspirando otra cosa; simplemente no sería yo.' },
+          { type: 'question', text: '¿Tu obra responde a algo o es más bien una pregunta abierta?' },
+          { type: 'body', text: 'Es una respuesta a la pregunta que el espectador quiera hacerle. Ya depende de cada quien si es la respuesta que buscaba o no."' },
+          { type: 'body', text: 'Quiero hacer lo que me gusta, crear piezas atemporales. A mismo tiempo me planteo que guiero (tengo que) vivir de mi marca: Nores imposible poder crear piezas que me gusten y que gusten a los demás lo suficiente para poder vivir de ello."' }
+        ]
+      }
+    };
+
     /* ========================================================================
        MOTOR DE GRAFITI (SOLO ACTIVO EN LA HOME PAGE)
        ======================================================================== */
@@ -1737,7 +2147,7 @@
     })();
 
     /* ========================================================================
-       CARRUSEL HORIZONTAL FLUIDO (TÁCTIL EN iOS/ANDROID + ARRASTRE CON MOUSE)
+       CARRUSEL HORIZONTAL EN EXPOSICIONES (TÁCTIL + ARRASTRE CON MOUSE)
        ======================================================================== */
     document.querySelectorAll('.runway-carousel').forEach((carousel) => {
       let isMouseDown = false;
@@ -1767,6 +2177,167 @@
     });
 
     /* ========================================================================
+       SLIDER DE ENTREVISTA (SWIPE HORIZONTAL + AUTOPLAY CADA 5 SEGUNDOS)
+       ======================================================================== */
+    const InterviewSlider = (() => {
+      const track = document.getElementById('interview-slider-track');
+      const dotsContainer = document.getElementById('interview-dots');
+      const textCol = document.getElementById('interview-text-col');
+      const mobileSub = document.getElementById('interview-mobile-subtitle');
+      const bodyStack = document.getElementById('interview-body-stack');
+      const footerTitle = document.getElementById('interview-footer-title');
+
+      let currentSlide = 0;
+      let totalSlides = 5;
+      let autoplayTimer = null;
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollStart = 0;
+
+      function updateDots(index) {
+        currentSlide = index;
+        dotsContainer.querySelectorAll('.interview-dot').forEach((dot, idx) => {
+          dot.classList.toggle('is-active', idx === index);
+        });
+      }
+
+      function goToSlide(index, smooth = true) {
+        if (!track || totalSlides === 0) return;
+        const targetIndex = ((index % totalSlides) + totalSlides) % totalSlides;
+        const slideWidth = track.clientWidth;
+        track.scrollTo({
+          left: targetIndex * slideWidth,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+        updateDots(targetIndex);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(() => {
+          if (!document.getElementById('interview-detail-view').classList.contains('is-active')) {
+            stopAutoplay();
+            return;
+          }
+          goToSlide(currentSlide + 1, true);
+        }, 5000);
+      }
+
+      function loadInterview(key) {
+        const data = INTERVIEWS_DATA[key];
+        if (!data) return;
+
+        stopAutoplay();
+        currentSlide = 0;
+        totalSlides = data.photos.length;
+
+        mobileSub.textContent = data.name;
+        footerTitle.textContent = `${data.name}_`;
+
+        // Renderizar las 5 fotografías
+        track.innerHTML = '';
+        dotsContainer.innerHTML = '';
+
+        data.photos.forEach((src, idx) => {
+          const fig = document.createElement('figure');
+          fig.className = 'interview-photo-slide';
+
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `${data.name} - Fotografía ${idx + 1}`;
+          img.onerror = function () { this.style.display = 'none'; };
+
+          fig.appendChild(img);
+          track.appendChild(fig);
+
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = idx === 0 ? 'interview-dot is-active' : 'interview-dot';
+          dot.setAttribute('aria-label', `Ver foto ${idx + 1}`);
+          dot.addEventListener('click', () => {
+            goToSlide(idx, true);
+            startAutoplay();
+          });
+          dotsContainer.appendChild(dot);
+        });
+
+        // Renderizar párrafos de la entrevista
+        bodyStack.innerHTML = '';
+        data.blocks.forEach((item) => {
+          const p = document.createElement('p');
+          if (item.type === 'question') {
+            p.className = 'interview-question';
+          }
+          p.textContent = item.text;
+          bodyStack.appendChild(p);
+        });
+
+        track.scrollLeft = 0;
+        if (textCol) textCol.scrollTop = 0;
+        startAutoplay();
+      }
+
+      // Detectar cambio de foto al hacer swipe táctil o scroll horizontal
+      let scrollEndTimeout = null;
+      track.addEventListener('scroll', () => {
+        const slideWidth = track.clientWidth || 1;
+        const idx = Math.round(track.scrollLeft / slideWidth);
+        if (idx >= 0 && idx < totalSlides && idx !== currentSlide) {
+          updateDots(idx);
+        }
+        clearTimeout(scrollEndTimeout);
+        scrollEndTimeout = setTimeout(() => {
+          if (document.getElementById('interview-detail-view').classList.contains('is-active')) {
+            startAutoplay();
+          }
+        }, 120);
+      });
+
+      // Soporte de arrastre con mouse en desktop
+      track.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        stopAutoplay();
+        track.classList.add('is-dragging');
+        startX = e.pageX - track.offsetLeft;
+        scrollStart = track.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        track.classList.remove('is-dragging');
+        const slideWidth = track.clientWidth || 1;
+        const nearest = Math.round(track.scrollLeft / slideWidth);
+        goToSlide(nearest, true);
+        startAutoplay();
+      });
+
+      track.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.25;
+        track.scrollLeft = scrollStart - walk;
+      });
+
+      track.addEventListener('touchstart', () => {
+        stopAutoplay();
+      }, { passive: true });
+
+      return {
+        load: loadInterview,
+        stop: stopAutoplay
+      };
+    })();
+
+    /* ========================================================================
        NAVEGACIÓN Y TRANSICIÓN SÓLIDA DE ABAJO A ARRIBA (SIN DEGRADADO)
        ======================================================================== */
     (() => {
@@ -1777,6 +2348,7 @@
       const fr1View = document.getElementById('fr1-view');
       const fr2View = document.getElementById('fr2-view');
       const entrevistasView = document.getElementById('entrevistas-view');
+      const interviewDetailView = document.getElementById('interview-detail-view');
       const quienesView = document.getElementById('quienes-view');
       const fr1Carousel = document.getElementById('fr1-carousel');
       const fr2Carousel = document.getElementById('fr2-carousel');
@@ -1791,7 +2363,12 @@
         fr1View.classList.remove('is-active');
         fr2View.classList.remove('is-active');
         entrevistasView.classList.remove('is-active');
+        interviewDetailView.classList.remove('is-active');
         quienesView.classList.remove('is-active');
+
+        if (!targetRoute.startsWith('entrevista-')) {
+          InterviewSlider.stop();
+        }
 
         if (targetRoute === 'tikets') {
           ticketsView.classList.add('is-active');
@@ -1815,6 +2392,12 @@
           entrevistasView.classList.add('is-active');
           document.body.style.backgroundColor = '#000000';
           GraffitiEngine.disable();
+        } else if (targetRoute.startsWith('entrevista-')) {
+          const key = targetRoute.replace('entrevista-', '');
+          interviewDetailView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+          InterviewSlider.load(key);
         } else if (targetRoute === 'quienes-somos') {
           quienesView.classList.add('is-active');
           document.body.style.backgroundColor = '#000000';
@@ -1893,6 +2476,16 @@
           const route = btn.dataset.route;
           if (route === 'fashion-runway-1' || route === 'fashion-runway-2') {
             navigateTo(route);
+          }
+        });
+      });
+
+      // Tarjetas de entrevistas -> entran al detalle individual
+      document.querySelectorAll('.interview-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const key = card.dataset.interview;
+          if (key && INTERVIEWS_DATA[key]) {
+            navigateTo(`entrevista-${key}`);
           }
         });
       });
