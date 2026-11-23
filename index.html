@@ -256,7 +256,7 @@
     }
 
     /* ==========================================================================
-       5. ESTILOS COMPARTIDOS DE PESTAÑAS OSCURAS (TIKETS_ & EXPOSICIONES_)
+       5. ESTILOS COMPARTIDOS DE PESTAÑAS OSCURAS
        ========================================================================== */
     .dark-section {
       position: fixed;
@@ -341,8 +341,8 @@
     }
 
     .section-nav-btn.is-current:hover,
-    .section-nav-btn:focus-visible,
-    .section-nav-btn:active {
+    .section-nav-btn.is-current:focus-visible,
+    .section-nav-btn.is-current:active {
       background-color: var(--accent-yellow);
       color: var(--ink-black);
     }
@@ -529,7 +529,6 @@
         padding: 20px;
       }
 
-      /* Centrado vertical en escritorio, no pegado arriba */
       .event-cta-box {
         grid-column: 2;
         align-self: center;
@@ -625,6 +624,185 @@
         align-self: end;
       }
     }
+
+    /* ==========================================================================
+       8. DETALLE: FASHION RUNWAY I _ (MÓVIL + DESKTOP)
+       ========================================================================== */
+    .fr1-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .fr1-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    /* Contenedor de galería horizontal (sangra hasta los bordes laterales para mostrar el recorte de la siguiente foto) */
+    .fr1-gallery-wrap {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      margin-left: calc(-18px - env(safe-area-inset-left));
+      margin-right: calc(-18px - env(safe-area-inset-right));
+    }
+
+    .fr1-carousel {
+      width: 100%;
+      height: 100%;
+      max-height: 44dvh;
+      display: flex;
+      align-items: stretch;
+      gap: 14px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: calc(18px + env(safe-area-inset-left));
+      padding-left: calc(18px + env(safe-area-inset-left));
+      padding-right: calc(18px + env(safe-area-inset-right));
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      cursor: grab;
+      scrollbar-width: none;
+    }
+
+    .fr1-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .fr1-carousel.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    /* En móvil caben 2 cuadros completos y se asoma el borde del 3ro */
+    .fr1-slide {
+      flex: 0 0 calc((100vw - 36px - 14px) / 2.18);
+      height: 100%;
+      background-color: var(--accent-yellow);
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .fr1-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Párrafo descriptivo en Owners Medium (500) */
+    .fr1-description {
+      align-self: center;
+      width: 100%;
+      max-width: 245px;
+      flex-shrink: 0;
+    }
+
+    .fr1-description p {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(0.84rem, 3.4vw, 0.96rem);
+      line-height: 1.24;
+      letter-spacing: -0.015em;
+      color: var(--ink-white);
+      text-align: justify;
+      text-align-last: justify;
+    }
+
+    /* Título en dos líneas abajo a la izquierda */
+    .fr1-title {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(2.15rem, 9.6vw, 4.35rem);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 900px) {
+      .fr1-view.is-active {
+        display: grid;
+        grid-template-columns: 185px 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 0 34px 42px;
+        gap: 28px 28px;
+      }
+
+      .fr1-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .fr1-gallery-wrap {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0;
+        height: 100%;
+        min-width: 0;
+      }
+
+      .fr1-carousel {
+        max-height: 100%;
+        height: 100%;
+        gap: 20px;
+        padding-left: 0;
+        padding-right: 42px;
+        scroll-padding-left: 0;
+      }
+
+      /* En desktop se ven 3 cuadros completos y asoma el 4to a la derecha */
+      .fr1-slide {
+        flex: 0 0 calc((100% - 40px) / 3.22);
+        height: 100%;
+      }
+
+      /* Fila inferior en desktop: Título a la izquierda y párrafo a la derecha */
+      .fr1-bottom-desktop-wrapper {
+        display: contents;
+      }
+
+      .fr1-title {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        align-self: end;
+        justify-self: start;
+        font-size: clamp(3.1rem, 4.6vw, 4.4rem);
+      }
+
+      .fr1-description {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: end;
+        justify-self: end;
+        margin-right: 42px;
+        max-width: 265px;
+      }
+
+      .fr1-description p {
+        font-size: clamp(0.9rem, 1.05vw, 1.02rem);
+        line-height: 1.24;
+      }
+    }
   </style>
 </head>
 <body>
@@ -681,7 +859,6 @@
   <section class="dark-section tickets-view" id="tickets-view" aria-label="Sección Tikets_">
 
     <div class="tickets-topbar">
-      <!-- Logo blanco en PNG (clic/tap vuelve a la Home) -->
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
         <img
           src="logo au blanco@300x.png"
@@ -693,7 +870,6 @@
         </span>
       </button>
 
-      <!-- Índice móvil con separadores "|" -->
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
@@ -704,7 +880,6 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
       </nav>
 
-      <!-- Índice lateral vertical en escritorio -->
       <ul class="desktop-side-nav">
         <li><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
@@ -718,7 +893,6 @@
     </div>
 
     <div class="tickets-stage">
-      <!-- Bloque de compra (en móvil va arriba de la foto; en escritorio centrado a la derecha) -->
       <div class="event-cta-box">
         <h2 class="event-title">Expo II _</h2>
         <a
@@ -731,7 +905,6 @@
         <p class="event-date">19 / 12 / 26</p>
       </div>
 
-      <!-- Imagen del flyer completa con inclinación de 2.862° -->
       <div class="flyer-frame">
         <img
           src="FLYER PARED-06.png"
@@ -752,7 +925,6 @@
   <section class="dark-section exposiciones-view" id="exposiciones-view" aria-label="Sección Exposiciones_">
 
     <div class="exposiciones-topbar">
-      <!-- Logo blanco en PNG (clic/tap vuelve a la Home) -->
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
         <img
           src="logo au blanco@300x.png"
@@ -764,7 +936,53 @@
         </span>
       </button>
 
-      <!-- Índice móvil con separadores "|" -->
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="exposiciones-list">
+      <button type="button" class="expo-item-btn" data-route="fashion-runway-1">FASHION RUNWAY I_</button>
+      <button type="button" class="expo-item-btn" data-route="fashion-runway-2">FASHION RUNWAY II_</button>
+    </div>
+
+    <h1 class="section-footer-title">Exposiciones_</h1>
+
+  </section>
+
+  <!-- 6. SECCIÓN FASHION RUNWAY I _ -->
+  <section class="dark-section fr1-view" id="fr1-view" aria-label="Exposición Fashion Runway I">
+
+    <div class="fr1-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img
+          src="logo au blanco@300x.png"
+          alt="arte underground_"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
+          arte<br>under<br>ground_
+        </span>
+      </button>
+
+      <!-- Índice superior en móvil con separadores "|" -->
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
@@ -788,13 +1006,33 @@
       </ul>
     </div>
 
-    <!-- Listado principal de exposiciones -->
-    <div class="exposiciones-list">
-      <button type="button" class="expo-item-btn" data-expo="fashion-runway-1">FASHION RUNWAY I_</button>
-      <button type="button" class="expo-item-btn" data-expo="fashion-runway-2">FASHION RUNWAY II_</button>
+    <!-- Galería con scroll horizontal (4 recuadros) -->
+    <div class="fr1-gallery-wrap">
+      <div class="fr1-carousel" id="fr1-carousel" role="region" aria-label="Galería fotográfica Fashion Runway I">
+        <figure class="fr1-slide">
+          <img src="frl 1.png" alt="Fashion Runway I - Fotografía 1" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="fr1-slide">
+          <img src="frl 2.png" alt="Fashion Runway I - Fotografía 2" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="fr1-slide">
+          <img src="frl 3.png" alt="Fashion Runway I - Fotografía 3" onerror="this.style.display='none';" />
+        </figure>
+        <figure class="fr1-slide">
+          <img src="frl 4.png" alt="Fashion Runway I - Fotografía 4" onerror="this.style.display='none';" />
+        </figure>
+      </div>
     </div>
 
-    <h1 class="section-footer-title">Exposiciones_</h1>
+    <!-- Párrafo descriptivo en Owners Medium (500) -->
+    <div class="fr1-description">
+      <p>
+        En esta edición exponemos a 5 marcas de ropa: Punkstar, Kills, NCK y Basurtto, llevada a cabo el 1 de Agosto de 2025 en el venue, Aparato, en Monterrey, México.
+      </p>
+    </div>
+
+    <!-- Título en dos líneas abajo a la izquierda -->
+    <h1 class="fr1-title">FASHION<br>RUNWAY I _</h1>
 
   </section>
 
@@ -967,6 +1205,39 @@
     })();
 
     /* ========================================================================
+       CARRUSEL HORIZONTAL FLUIDO (TÁCTIL EN iOS/ANDROID + ARRASTRE CON MOUSE)
+       ======================================================================== */
+    (() => {
+      const carousel = document.getElementById('fr1-carousel');
+      if (!carousel) return;
+
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollStart = 0;
+
+      carousel.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        carousel.classList.add('is-dragging');
+        startX = e.pageX - carousel.offsetLeft;
+        scrollStart = carousel.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        carousel.classList.remove('is-dragging');
+      });
+
+      carousel.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 1.4;
+        carousel.scrollLeft = scrollStart - walk;
+      });
+    })();
+
+    /* ========================================================================
        NAVEGACIÓN Y TRANSICIÓN SÓLIDA DE ABAJO A ARRIBA (SIN DEGRADADO)
        ======================================================================== */
     (() => {
@@ -974,6 +1245,8 @@
       const homeView = document.getElementById('home-view');
       const ticketsView = document.getElementById('tickets-view');
       const exposicionesView = document.getElementById('exposiciones-view');
+      const fr1View = document.getElementById('fr1-view');
+      const fr1Carousel = document.getElementById('fr1-carousel');
 
       let currentRoute = 'home';
       let isTransitioning = false;
@@ -982,6 +1255,7 @@
         homeView.style.display = 'none';
         ticketsView.classList.remove('is-active');
         exposicionesView.classList.remove('is-active');
+        fr1View.classList.remove('is-active');
 
         if (targetRoute === 'tikets') {
           ticketsView.classList.add('is-active');
@@ -989,6 +1263,11 @@
           GraffitiEngine.disable();
         } else if (targetRoute === 'exposiciones') {
           exposicionesView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'fashion-runway-1') {
+          fr1View.classList.add('is-active');
+          if (fr1Carousel) fr1Carousel.scrollLeft = 0;
           document.body.style.backgroundColor = '#000000';
           GraffitiEngine.disable();
         } else {
@@ -1044,11 +1323,21 @@
         btn.addEventListener('click', () => navigateTo('home'));
       });
 
-      // Botones del índice dentro de Tikets_ y Exposiciones_
+      // Botones del índice dentro de secciones oscuras
       document.querySelectorAll('.section-nav-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const route = btn.dataset.route;
           if (route) {
+            navigateTo(route);
+          }
+        });
+      });
+
+      // Botones de exposiciones -> entran a su detalle
+      document.querySelectorAll('.expo-item-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const route = btn.dataset.route;
+          if (route === 'fashion-runway-1') {
             navigateTo(route);
           }
         });
