@@ -967,7 +967,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: stretch;
-      gap: 10px;
+      gap: 8px;
     }
 
     .interview-detail-topbar {
@@ -983,13 +983,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
     .interview-slider-track {
-      width: min(44vw, 185px);
-      height: min(31dvh, 245px);
+      width: min(46vw, 195px);
+      aspect-ratio: 3 / 4;
+      max-height: 29dvh;
       display: flex;
       overflow-x: auto;
       overflow-y: hidden;
@@ -1024,6 +1025,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
       display: block;
       pointer-events: none;
       -webkit-user-drag: none;
@@ -1089,11 +1091,11 @@
     .interview-body-stack {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       padding-bottom: 12px;
     }
 
-    /* Párrafos justificados en Owners Bold */
+    /* Todo el texto de la entrevista en mismo color blanco y Owners Bold */
     .interview-body-stack p {
       font-family: var(--font-body);
       font-weight: 700;
@@ -1105,23 +1107,33 @@
       text-align-last: left;
     }
 
-    .interview-body-stack p.interview-question {
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.78);
-      margin-bottom: -6px;
-    }
-
-    /* Título grande abajo a la izquierda en itálica (ej. Punkstar_) */
-    .interview-footer-title {
+    /* Botón de regreso a Entrevistas_ en esquina inferior izquierda */
+    .interview-back-btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      border: none;
+      padding: 2px 10px;
       font-family: var(--font-index);
       font-weight: 500;
       font-style: italic;
-      font-size: clamp(2.2rem, 9.8vw, 4.4rem);
+      font-size: clamp(2rem, 9vw, 4.2rem);
       line-height: 0.96;
       letter-spacing: -0.03em;
       color: var(--ink-white);
       align-self: flex-start;
+      text-align: left;
+      cursor: pointer;
       flex-shrink: 0;
+      transition: none;
+    }
+
+    .interview-back-btn:hover,
+    .interview-back-btn:focus-visible,
+    .interview-back-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
     }
 
     @media (min-width: 900px) {
@@ -1154,6 +1166,8 @@
 
       .interview-slider-track {
         width: 100%;
+        aspect-ratio: auto;
+        max-height: none;
         height: min(60dvh, 470px);
       }
 
@@ -1179,7 +1193,7 @@
       }
 
       .interview-body-stack {
-        gap: 22px;
+        gap: 20px;
       }
 
       .interview-body-stack p {
@@ -1187,11 +1201,12 @@
         line-height: 1.22;
       }
 
-      .interview-footer-title {
+      .interview-back-btn {
         grid-column: 1 / 3;
         grid-row: 2;
+        justify-self: start;
         align-self: end;
-        font-size: clamp(3.1rem, 4.5vw, 4.3rem);
+        font-size: clamp(3rem, 4.4vw, 4.2rem);
       }
     }
 
@@ -1791,8 +1806,10 @@
       <div class="interview-body-stack" id="interview-body-stack"></div>
     </div>
 
-    <!-- Título inferior en itálica con guión bajo -->
-    <h1 class="interview-footer-title" id="interview-footer-title">Punkstar_</h1>
+    <!-- Título inferior en esquina inferior izquierda para regresar a Entrevistas_ -->
+    <button type="button" class="interview-back-btn" id="interview-back-btn" aria-label="Volver a Entrevistas_">
+      Punkstar_
+    </button>
 
   </section>
 
@@ -1871,110 +1888,109 @@
       'punkstar': {
         name: 'Punkstar',
         photos: ['pk1.png', 'pk2.png', 'pk3.png', 'pk4.png', 'pk5.png'],
-        blocks: [
-          { type: 'body', text: 'Nuestro arte nace de la sensibilidad con la que percibimos el mundo. De sentir demasiado y no saber contenerlo.' },
-          { type: 'body', text: 'Más que una emoción fija, buscamos generar algo que conecte profundo y despierte algo real en quien lo recibe.' },
-          { type: 'body', text: 'Nuestro arte es del mundo para el mundo, no tiene residencia ni permanencia, se refleja en quién lo puede sentir.' },
-          { type: 'body', text: 'Vivimos en un mundo saturado de opiniones, estimulos y voces externas que muchas veces nublan quienes somos realmente ""Con nuestro trabajo, queremos abrir una brecha, un espacio de pausa y reflexión.' },
-          { type: 'body', text: 'No buscamos dar respuestas concretas, sino abrir espacios para que cada quien encuentre su propio sentido."' },
-          { type: 'question', text: '¿Qué referencia siempre vuelve a ti, aunque no quieras? (puede ser un artista, un recuerdo, un lugar...)' },
-          { type: 'body', text: 'Pink Floyd' },
-          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Cuál sería?' },
-          { type: 'body', text: '“Popper”' },
-          { type: 'question', text: '¿Qué parte de tu identidad no se puede separar de lo que haces?' },
-          { type: 'body', text: 'La sensibilidad extrema.' },
-          { type: 'body', text: 'No siempre saber gos que estamos buscando. A veces es une emoción que se nos desborda a veces es un silencio que necesita cuérpo." No seguimes armulas ni pedimos permiso: hacemos lo que nos nace, lo que nos duele, lo que se siente gente.' },
-          { type: 'body', text: 'No buscamos ser recordados, solo que se note que fue honesto, que vino de alguien que sintió de verdad. Y que tal vez, inspire a otros a ser más ellos mismos."' }
+        paragraphs: [
+          'Nuestro arte nace de la sensibilidad con la que percibimos el mundo. De sentir demasiado y no saber contenerlo.',
+          'Más que una emoción fija, buscamos generar algo que conecte profundo y despierte algo real en quien lo recibe.',
+          'Nuestro arte es del mundo para el mundo, no tiene residencia ni permanencia, se refleja en quién lo puede sentir.',
+          'Vivimos en un mundo saturado de opiniones, estimulos y voces externas que muchas veces nublan quienes somos realmente ""Con nuestro trabajo, queremos abrir una brecha, un espacio de pausa y reflexión.',
+          'No buscamos dar respuestas concretas, sino abrir espacios para que cada quien encuentre su propio sentido."',
+          '¿Qué referencia siempre vuelve a ti, aunque no quieras? (puede ser un artista, un recuerdo, un lugar...)',
+          'Pink Floyd',
+          'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Cuál sería? “Popper”',
+          '¿Qué parte de tu identidad no se puede separar de lo que haces?',
+          'La sensibilidad extrema.',
+          'No siempre saber gos que estamos buscando. A veces es une emoción que se nos desborda a veces es un silencio que necesita cuérpo." No seguimes armulas ni pedimos permiso: hacemos lo que nos nace, lo que nos duele, lo que se siente gente.',
+          'No buscamos ser recordados, solo que se note que fue honesto, que vino de alguien que sintió de verdad. Y que tal vez, inspire a otros a ser más ellos mismos."'
         ]
       },
       'basurtto': {
         name: 'Basurtto',
         photos: ['bt1.png', 'bt2.png', 'bt3.png', 'bt4.png', 'bt5.png'],
-        blocks: [
-          { type: 'body', text: '"Siempre busco cambio. Pienso que puedes dejar algo bueno en las personas mientras te liberas de ti mismo.' },
-          { type: 'body', text: 'Todo lo que hago es persona y una declaración. El romance y lo poético también puede ser un poco caotico.' },
-          { type: 'body', text: 'El ser mío es ser contradictorio siempre, así que siempre estare en contra de algo. Quiero gritar. "Me gusta la delicadeza del ser pero también la ira es parte de lo que soy.' },
-          { type: 'body', text: '"Siempre me siento vulnerable, como si vieran por dentro de mi, a veces se siente aterrador pero lo disfruto también."' },
-          { type: 'body', text: '"Mi inspiración siempre es de como he experimentado mi vida, la música es algo mu esencial para mí, todo lo que veo y siento. Tu mente en algún punto quiere mater alizar lo que has sentido alguna vez en tu vida."' },
-          { type: 'body', text: '"El arte debería no ser capitalista. Puede pertenecer donde sea y puede ser de quien sea. Si no es así entonces solo es simplemente algo material sin amor ni propósito."' },
-          { type: 'body', text: '"Muchas cosas las tengoclaras pero gurn somos jovenes. Hay cosas que ya no significan nada y otras que significaran mucho Quiero que las personas puedan encontrar algún sentimiento en lo que hago.' },
-          { type: 'question', text: '¿Qué pasa con tu obra cuando pasa el tiempo? ¿Envejece, se transforma, desaparece:..?' },
-          { type: 'body', text: '"El valor siempre está. Es como cuando aprendes algo nuevo, no puedes quitarle el valor a tus ideas porque en algún momento estuviste ahí."' },
-          { type: 'question', text: '¿Que silencio quieres romper con tu trabajo?' },
-          { type: 'body', text: '"El hacer lo que hago habla por sí mismo. Lo que hacemos de cierta manera ya es anti sistema."' },
-          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Quál sería?' },
-          { type: 'body', text: '"Más que eso, una sensación. Seria cuando el viento roza delicadamente tu rostro y despeina tu cabello.' },
-          { type: 'body', text: '"Habrá personas como yo, que busquen la libertad como yo lo hago, que amen como yo, que busquen el sentir y es donde lo que creo será algo sigrificativo.' }
+        paragraphs: [
+          '"Siempre busco cambio. Pienso que puedes dejar algo bueno en las personas mientras te liberas de ti mismo.',
+          'Todo lo que hago es persona y una declaración. El romance y lo poético también puede ser un poco caotico.',
+          'El ser mío es ser contradictorio siempre, así que siempre estare en contra de algo. Quiero gritar. "Me gusta la delicadeza del ser pero también la ira es parte de lo que soy.',
+          '"Siempre me siento vulnerable, como si vieran por dentro de mi, a veces se siente aterrador pero lo disfruto también."',
+          '"Mi inspiración siempre es de como he experimentado mi vida, la música es algo mu esencial para mí, todo lo que veo y siento. Tu mente en algún punto quiere mater alizar lo que has sentido alguna vez en tu vida."',
+          '"El arte debería no ser capitalista. Puede pertenecer donde sea y puede ser de quien sea. Si no es así entonces solo es simplemente algo material sin amor ni propósito."',
+          '"Muchas cosas las tengoclaras pero gurn somos jovenes. Hay cosas que ya no significan nada y otras que significaran mucho Quiero que las personas puedan encontrar algún sentimiento en lo que hago.',
+          '¿Qué pasa con tu obra cuando pasa el tiempo? ¿Envejece, se transforma, desaparece:..?',
+          '"El valor siempre está. Es como cuando aprendes algo nuevo, no puedes quitarle el valor a tus ideas porque en algún momento estuviste ahí."',
+          '¿Que silencio quieres romper con tu trabajo?',
+          '"El hacer lo que hago habla por sí mismo. Lo que hacemos de cierta manera ya es anti sistema."',
+          'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Quál sería?',
+          '"Más que eso, una sensación. Seria cuando el viento roza delicadamente tu rostro y despeina tu cabello.',
+          '"Habrá personas como yo, que busquen la libertad como yo lo hago, que amen como yo, que busquen el sentir y es donde lo que creo será algo sigrificativo.'
         ]
       },
       'nck': {
         name: 'NCK',
         photos: ['nk1.png', 'nk2.png', 'nk3.png', 'nk4.png', 'nk5.png'],
-        blocks: [
-          { type: 'body', text: '"Cada prenda que creo es un puente a mi niñez, donde la imaginación mandaba y todo era posible.' },
-          { type: 'body', text: '"Mi arte pertenece en los bordes: donde las calles se encuentran con las redes, y el ruido se mezcla con el silencio, es un espacio líquido, que se mueve entre lo público y lo íntimo, siempre buscando romper límites y conectar con lo inesperado.' },
-          { type: 'body', text: '"A través de mi trabajo aprendí que mi fuerza está en la vulnerabilidad y en abrazar lo imperfecto." "El error y el accidente son el pulso vital de mi creación, son las grietas por donde entra la luz, las sorpresas que transforman lo previsto en algo nuevo auténtico.' },
-          { type: 'question', text: '¿En qué momento sabes que tu obra está terminada?' },
-          { type: 'body', text: '"Una obra está terminada cuando deja de ser solo mía y empieza a ser de quienes la miran. Cuando ya no busco perfección, sino conexión.' },
-          { type: 'body', text: '"Quiero reparar la fragilidad oculta de quienes se sienten invisibles, denunciar la rigidez de un sistema que aplasta la diversidad y celebrar la fuerza indomable de la diferencia que transforma el mundo." "Quiero romper el silencio de la conformidad y el miedo, ese que calla las verdades incómodas y apaga las voces autenticas.' },
-          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Cuái sería?' },
-          { type: 'body', text: '"Amargo y picante, como un café negro con un toque de chile... inesperado y despierta los sentidos.' },
-          { type: 'question', text: '¿Qué conflicto o pregunta sigue viva en tu obra, incluso sin resolver?' },
-          { type: 'body', text: '¿Cómo podemos ser libres en un mundo que constantemente nos quiere encasillar? Ese conflicto entre pertenecer y romper, entre mostrar y esconder, impulsa cada creación y mantiene el fuego encendido.' },
-          { type: 'body', text: 'Crear no es solo una acción, es mi esencia. Si dejara de crear, perdería mi voz más profunda, esa que me impulsa a cuestionar, soñar y transformar, sin la creación, el mundo se volvería más silencioso para mí. Crear es existir en libertad."' },
-          { type: 'question', text: '¿Hay alguna idea que aun no te animas a hacer?' },
-          { type: 'body', text: 'Yo nunca me quedo con las ganas, yo siempre me animo a hacerlo.' },
-          { type: 'question', text: '¿Qué estás tratando de decir sin decirlo directamente mediante tus obras?' },
-          { type: 'body', text: 'No vestimos cuerpos, vestimos ideas. Somos arte que incomoda, moda que habla. Cuestionamos lo normal, celebramos lo raro. Nuestra ropa no busca agradar, busca despertar.' },
-          { type: 'question', text: '¿Qué parte de ti se revela solo cuando creas?' },
-          { type: 'body', text: '\'La parte más cruda y vulnerable de mí, esa que no siempre se muestra pero que encuentra en la creación un espacio seguro para expresarse. Es donde la autenticidad florece y la 0 verdad personal toma forma.' },
-          { type: 'body', text: 'Me gustaría que mi arte siga siendo una voz que despierte, un fuego que no se apague, y un espacio para que otros encuentren libertad para expresarse." "Como la memoria que se adapta y se reinventa, mi arte muta con el tiempo, se resignifica en cada mirada nueva, y nunca desaparece, porque vive en la experiencia de quien la encuentra.' }
+        paragraphs: [
+          '"Cada prenda que creo es un puente a mi niñez, donde la imaginación mandaba y todo era posible.',
+          '"Mi arte pertenece en los bordes: donde las calles se encuentran con las redes, y el ruido se mezcla con el silencio, es un espacio líquido, que se mueve entre lo público y lo íntimo, siempre buscando romper límites y conectar con lo inesperado.',
+          '"A través de mi trabajo aprendí que mi fuerza está en la vulnerabilidad y en abrazar lo imperfecto." "El error y el accidente son el pulso vital de mi creación, son las grietas por donde entra la luz, las sorpresas que transforman lo previsto en algo nuevo auténtico.',
+          '¿En qué momento sabes que tu obra está terminada?',
+          '"Una obra está terminada cuando deja de ser solo mía y empieza a ser de quienes la miran. Cuando ya no busco perfección, sino conexión.',
+          '"Quiero reparar la fragilidad oculta de quienes se sienten invisibles, denunciar la rigidez de un sistema que aplasta la diversidad y celebrar la fuerza indomable de la diferencia que transforma el mundo." "Quiero romper el silencio de la conformidad y el miedo, ese que calla las verdades incómodas y apaga las voces autenticas.',
+          'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. ¿Cuái sería?',
+          '"Amargo y picante, como un café negro con un toque de chile... inesperado y despierta los sentidos.',
+          '¿Qué conflicto o pregunta sigue viva en tu obra, incluso sin resolver?',
+          '¿Cómo podemos ser libres en un mundo que constantemente nos quiere encasillar? Ese conflicto entre pertenecer y romper, entre mostrar y esconder, impulsa cada creación y mantiene el fuego encendido.',
+          'Crear no es solo una acción, es mi esencia. Si dejara de crear, perdería mi voz más profunda, esa que me impulsa a cuestionar, soñar y transformar, sin la creación, el mundo se volvería más silencioso para mí. Crear es existir en libertad."',
+          '¿Hay alguna idea que aun no te animas a hacer?',
+          'Yo nunca me quedo con las ganas, yo siempre me animo a hacerlo.',
+          '¿Qué estás tratando de decir sin decirlo directamente mediante tus obras?',
+          'No vestimos cuerpos, vestimos ideas. Somos arte que incomoda, moda que habla. Cuestionamos lo normal, celebramos lo raro. Nuestra ropa no busca agradar, busca despertar.',
+          '¿Qué parte de ti se revela solo cuando creas?',
+          '\'La parte más cruda y vulnerable de mí, esa que no siempre se muestra pero que encuentra en la creación un espacio seguro para expresarse. Es donde la autenticidad florece y la 0 verdad personal toma forma.',
+          'Me gustaría que mi arte siga siendo una voz que despierte, un fuego que no se apague, y un espacio para que otros encuentren libertad para expresarse." "Como la memoria que se adapta y se reinventa, mi arte muta con el tiempo, se resignifica en cada mirada nueva, y nunca desaparece, porque vive en la experiencia de quien la encuentra.'
         ]
       },
       'kills': {
         name: 'Kills',
         photos: ['k1.png', 'k2.png', 'k3.png', 'k4.png', 'k5.png'],
-        blocks: [
-          { type: 'body', text: 'No quiero que busquen mi nombre, quiero que se sienta y dejarlo fatuado, encuéntrenme sin buscarme, welcome to the kills world."' },
-          { type: 'body', text: 'KILL' },
-          { type: 'body', text: 'Kills no se crea ni se destruye, solo se transforma.' },
-          { type: 'body', text: 'Mi arte va de la necesidad de tener una voz, quiero que mi existencia tenga eco, quiero que sepan que yo estuve aquí, ahí y allá.' },
-          { type: 'body', text: 'Busco un universo, busco crear fantasía desde historias no escritas, me inspira todo lo que incomoda, lo que no debería estar ahí o que rompe la lógica, busco mover mi caos y hacer ne con ello.' },
-          { type: 'body', text: 'Mis inspiraciones siempre vienen desde lo más cotidiano, desde la estética de una película, la textura que vi en la calle, la sabana vieja que vi en el mercado, mi canción favorita de la infancia, un musical de broadway...' },
-          { type: 'question', text: '¿Qué referencia siempre vuelve a ti, aunque no quieras? (puede ser un artista, un recuerdo, un lugar...)' },
-          { type: 'body', text: 'The Rocky Horror Picture Show' },
-          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. Cual sería?' },
-          { type: 'body', text: 'Tierra mojada.' },
-          { type: 'question', text: '¿Qué cambiaría de ti si dejaras de crear?' },
-          { type: 'body', text: 'Moriría.' },
-          { type: 'question', text: '¿Hay una emoción o estado que buscás generar cada vez que creás?' },
-          { type: 'body', text: 'Just unbothered coolness.' },
-          { type: 'question', text: 'Hay una palabra que se repita en tu cabeza cuando estás creando?' },
-          { type: 'body', text: 'Freak' },
-          { type: 'body', text: 'Podemos encontrar belleza y uncionalidad en cualquier lado, admirar con los ojos correctos te hace poder crea desde lo que sea.\'Crear desde lo accidental permite la transformación.' }
+        paragraphs: [
+          'No quiero que busquen mi nombre, quiero que se sienta y dejarlo fatuado, encuéntrenme sin buscarme, welcome to the kills world."',
+          'KILL',
+          'Kills no se crea ni se destruye, solo se transforma.',
+          'Mi arte va de la necesidad de tener una voz, quiero que mi existencia tenga eco, quiero que sepan que yo estuve aquí, ahí y allá.',
+          'Busco un universo, busco crear fantasía desde historias no escritas, me inspira todo lo que incomoda, lo que no debería estar ahí o que rompe la lógica, busco mover mi caos y hacer ne con ello.',
+          'Mis inspiraciones siempre vienen desde lo más cotidiano, desde la estética de una película, la textura que vi en la calle, la sabana vieja que vi en el mercado, mi canción favorita de la infancia, un musical de broadway...',
+          '¿Qué referencia siempre vuelve a ti, aunque no quieras? (puede ser un artista, un recuerdo, un lugar...)',
+          'The Rocky Horror Picture Show',
+          'Si tu arte tuviera un sabor, un aroma, un sonido, una textura, etc. Cual sería?',
+          'Tierra mojada.',
+          '¿Qué cambiaría de ti si dejaras de crear?',
+          'Moriría.',
+          '¿Hay una emoción o estado que buscás generar cada vez que creás?',
+          'Just unbothered coolness.',
+          'Hay una palabra que se repita en tu cabeza cuando estás creando?',
+          'Freak',
+          'Podemos encontrar belleza y uncionalidad en cualquier lado, admirar con los ojos correctos te hace poder crea desde lo que sea.\'Crear desde lo accidental permite la transformación.'
         ]
       },
       'indie-enfants': {
         name: 'Indie Enfants',
         photos: ['ie1.png', 'ie2.png', 'ie3.png', 'ie4.png', 'ie5.png'],
-        blocks: [
-          { type: 'body', text: '"Quiero mis piezas sean eídas como mi diario, personal; que emitan todo lo que siento sin tener que usar palabras como la música de badbadnotgood."' },
-          { type: 'body', text: '"Siempre recurro al recuerdo de mi infancia en el extranjero; de mi niñez en Romania viendo nieve caer por primera vez o de mis días de preadolescente en una pequeña ciudad cerca de Buenos Aires. No solo por la experiencia, sino, por la complejidad de sentimientos que conllevo."' },
-          { type: 'body', text: '"Quiero que mis piezas emanen nostalgia pero una nostalgia tranquila como esa que sientes cuando por fin sanas algo que pensaste que por siempre dolería; la calma despues de la tormenta.' },
-          { type: 'question', text: '¿Que lugar ocupa el error o el accidente en tu proceso creativo?' },
-          { type: 'body', text: '"Los errores son inevitables, en especial en el proceso de crear ropa. Es muy difícil que me quede con el primer draft de mis ideas; venus siempre hay lugar para mejorar."' },
-          { type: 'question', text: 'Si tu arte tuviera un sabor, un aroma, un sonido, una texturaketc. ¿Cuál sería?' },
-          { type: 'body', text: 'Want You To Love Me de Fiona Apple' },
-          { type: 'question', text: '*Qué parte de tu identidad no se puede separar de lo que haces?' },
-          { type: 'body', text: '"Mi naturaleza melancólica. Mis piezas siempre (o por ahora) nacerán de mis recuerdos y de mis experiencias."' },
-          { type: 'question', text: '¿Hay una palabra que se repita en tu cabeza cuando estas creando?' },
-          { type: 'body', text: 'Epifanía.' },
-          { type: 'body', text: 'Quiero crear, crear y crear hasta que la vida no me lo permita.' },
-          { type: 'question', text: '¿Qué cambiaría de ti si dejaras de crear?' },
-          { type: 'body', text: 'No me veo aspirando otra cosa; simplemente no sería yo.' },
-          { type: 'question', text: '¿Tu obra responde a algo o es más bien una pregunta abierta?' },
-          { type: 'body', text: 'Es una respuesta a la pregunta que el espectador quiera hacerle. Ya depende de cada quien si es la respuesta que buscaba o no."' },
-          { type: 'body', text: 'Quiero hacer lo que me gusta, crear piezas atemporales. A mismo tiempo me planteo que guiero (tengo que) vivir de mi marca: Nores imposible poder crear piezas que me gusten y que gusten a los demás lo suficiente para poder vivir de ello."' }
+        paragraphs: [
+          '"Quiero mis piezas sean eídas como mi diario, personal; que emitan todo lo que siento sin tener que usar palabras como la música de badbadnotgood."',
+          '"Siempre recurro al recuerdo de mi infancia en el extranjero; de mi niñez en Romania viendo nieve caer por primera vez o de mis días de preadolescente en una pequeña ciudad cerca de Buenos Aires. No solo por la experiencia, sino, por la complejidad de sentimientos que conllevo."',
+          '"Quiero que mis piezas emanen nostalgia pero una nostalgia tranquila como esa que sientes cuando por fin sanas algo que pensaste que por siempre dolería; la calma despues de la tormenta.',
+          '¿Que lugar ocupa el error o el accidente en tu proceso creativo?',
+          '"Los errores son inevitables, en especial en el proceso de crear ropa. Es muy difícil que me quede con el primer draft de mis ideas; venus siempre hay lugar para mejorar."',
+          'Si tu arte tuviera un sabor, un aroma, un sonido, una texturaketc. ¿Cuál sería?',
+          'Want You To Love Me de Fiona Apple',
+          '*Qué parte de tu identidad no se puede separar de lo que haces?',
+          '"Mi naturaleza melancólica. Mis piezas siempre (o por ahora) nacerán de mis recuerdos y de mis experiencias."',
+          '¿Hay una palabra que se repita en tu cabeza cuando estas creando?',
+          'Epifanía.',
+          'Quiero crear, crear y crear hasta que la vida no me lo permita.',
+          '¿Qué cambiaría de ti si dejaras de crear?',
+          'No me veo aspirando otra cosa; simplemente no sería yo.',
+          '¿Tu obra responde a algo o es más bien una pregunta abierta?',
+          'Es una respuesta a la pregunta que el espectador quiera hacerle. Ya depende de cada quien si es la respuesta que buscaba o no."',
+          'Quiero hacer lo que me gusta, crear piezas atemporales. A mismo tiempo me planteo que guiero (tengo que) vivir de mi marca: Nores imposible poder crear piezas que me gusten y que gusten a los demás lo suficiente para poder vivir de ello."'
         ]
       }
     };
@@ -2185,7 +2201,7 @@
       const textCol = document.getElementById('interview-text-col');
       const mobileSub = document.getElementById('interview-mobile-subtitle');
       const bodyStack = document.getElementById('interview-body-stack');
-      const footerTitle = document.getElementById('interview-footer-title');
+      const backBtn = document.getElementById('interview-back-btn');
 
       let currentSlide = 0;
       let totalSlides = 5;
@@ -2239,9 +2255,9 @@
         totalSlides = data.photos.length;
 
         mobileSub.textContent = data.name;
-        footerTitle.textContent = `${data.name}_`;
+        backBtn.textContent = `${data.name}_`;
+        backBtn.setAttribute('aria-label', `Volver a Entrevistas_ desde ${data.name}`);
 
-        // Renderizar las 5 fotografías
         track.innerHTML = '';
         dotsContainer.innerHTML = '';
 
@@ -2268,14 +2284,10 @@
           dotsContainer.appendChild(dot);
         });
 
-        // Renderizar párrafos de la entrevista
         bodyStack.innerHTML = '';
-        data.blocks.forEach((item) => {
+        data.paragraphs.forEach((text) => {
           const p = document.createElement('p');
-          if (item.type === 'question') {
-            p.className = 'interview-question';
-          }
-          p.textContent = item.text;
+          p.textContent = text;
           bodyStack.appendChild(p);
         });
 
@@ -2284,7 +2296,6 @@
         startAutoplay();
       }
 
-      // Detectar cambio de foto al hacer swipe táctil o scroll horizontal
       let scrollEndTimeout = null;
       track.addEventListener('scroll', () => {
         const slideWidth = track.clientWidth || 1;
@@ -2300,7 +2311,6 @@
         }, 120);
       });
 
-      // Soporte de arrastre con mouse en desktop
       track.addEventListener('mousedown', (e) => {
         isMouseDown = true;
         stopAutoplay();
@@ -2352,6 +2362,7 @@
       const quienesView = document.getElementById('quienes-view');
       const fr1Carousel = document.getElementById('fr1-carousel');
       const fr2Carousel = document.getElementById('fr2-carousel');
+      const interviewBackBtn = document.getElementById('interview-back-btn');
 
       let currentRoute = 'home';
       let isTransitioning = false;
@@ -2415,7 +2426,6 @@
         if (isTransitioning || targetRoute === currentRoute) return;
         isTransitioning = true;
 
-        // 1. Sube el telón negro sólido desde abajo
         wipe.classList.remove('is-leaving');
         void wipe.offsetWidth;
         wipe.classList.add('is-rising');
@@ -2423,7 +2433,6 @@
         setTimeout(() => {
           applyRouteView(targetRoute);
 
-          // 2. Retira el telón hacia arriba para revelar la vista destino
           wipe.classList.remove('is-rising');
           wipe.classList.add('is-leaving');
 
@@ -2439,7 +2448,6 @@
         }, 340);
       }
 
-      // Enlaces del índice principal en la Home
       document.querySelectorAll('.nav-link').forEach((link) => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
@@ -2455,12 +2463,10 @@
         });
       });
 
-      // Logo blanco en secciones oscuras -> regresa a Home
       document.querySelectorAll('.js-go-home').forEach((btn) => {
         btn.addEventListener('click', () => navigateTo('home'));
       });
 
-      // Botones del índice dentro de secciones oscuras
       document.querySelectorAll('.section-nav-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const route = btn.dataset.route;
@@ -2470,7 +2476,6 @@
         });
       });
 
-      // Botones de exposiciones -> entran a su detalle
       document.querySelectorAll('.expo-item-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const route = btn.dataset.route;
@@ -2480,7 +2485,6 @@
         });
       });
 
-      // Tarjetas de entrevistas -> entran al detalle individual
       document.querySelectorAll('.interview-card').forEach((card) => {
         card.addEventListener('click', () => {
           const key = card.dataset.interview;
@@ -2489,6 +2493,10 @@
           }
         });
       });
+
+      if (interviewBackBtn) {
+        interviewBackBtn.addEventListener('click', () => navigateTo('entrevistas'));
+      }
     })();
   </script>
 </body>
