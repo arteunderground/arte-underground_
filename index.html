@@ -96,7 +96,6 @@
       object-fit: contain;
     }
 
-    /* Índice centrado con alineación derecha en los ítems */
     .main-nav {
       align-self: center;
       display: flex;
@@ -115,7 +114,6 @@
       pointer-events: auto;
     }
 
-    /* La barra amarilla entra en seco (sin transición) */
     .nav-link {
       display: inline-block;
       text-decoration: none;
@@ -138,7 +136,6 @@
       outline: none;
     }
 
-    /* Manifiesto justificado en todas las líneas */
     .brand-manifesto {
       align-self: center;
       width: 100%;
@@ -156,7 +153,6 @@
       text-align-last: justify;
     }
 
-    /* Botón limpiar muro (solo visible en Home cuando hay trazos) */
     #clear-spray-btn {
       position: fixed;
       bottom: calc(16px + env(safe-area-inset-bottom));
@@ -291,7 +287,6 @@
       object-fit: contain;
     }
 
-    /* Índice superior en móvil con separadores "|" */
     .mobile-pipe-nav {
       display: flex;
       flex-wrap: wrap;
@@ -327,7 +322,6 @@
       transition: none;
     }
 
-    /* Franja amarilla en seco con texto negro al pasar cursor o tocar */
     .section-nav-btn:hover,
     .section-nav-btn:focus-visible,
     .section-nav-btn:active {
@@ -347,7 +341,6 @@
       color: var(--ink-black);
     }
 
-    /* Índice lateral vertical en escritorio (>= 900px) */
     .desktop-side-nav {
       display: none;
       list-style: none;
@@ -432,7 +425,6 @@
       color: var(--ink-white);
     }
 
-    /* Franja amarilla por defecto; cambia a blanco al pasar cursor o tocar */
     .buy-btn {
       display: inline-flex;
       align-items: center;
@@ -626,7 +618,7 @@
     }
 
     /* ==========================================================================
-       8. DETALLE COMPARTIDO: FASHION RUNWAY I _ Y II _ (MÓVIL + DESKTOP)
+       8. DETALLE COMPARTIDO: FASHION RUNWAY I _ Y II _
        ========================================================================== */
     .runway-detail-view.is-active {
       display: flex;
@@ -703,7 +695,6 @@
       -webkit-user-drag: none;
     }
 
-    /* Rotación de 1 grado exclusiva para Fashion Runway II */
     .fr2-view .runway-slide {
       transform: rotate(1deg);
       transform-origin: center center;
@@ -960,7 +951,7 @@
     }
 
     /* ==========================================================================
-       10. DETALLE DE ENTREVISTA INDIVIDUAL (MÓVIL + DESKTOP)
+       10. DETALLE DE ENTREVISTA INDIVIDUAL
        ========================================================================== */
     .interview-detail-view.is-active {
       display: flex;
@@ -978,7 +969,6 @@
       flex-shrink: 0;
     }
 
-    /* Bloque de foto con swipe horizontal + 5 puntos amarillos */
     .interview-media-col {
       display: flex;
       flex-direction: column;
@@ -1056,7 +1046,6 @@
       transform: scale(1.22);
     }
 
-    /* Contenedor de lectura con scroll vertical */
     .interview-text-col {
       flex: 1;
       min-height: 0;
@@ -1095,7 +1084,6 @@
       padding-bottom: 12px;
     }
 
-    /* Todo el texto de la entrevista en mismo color blanco y Owners Bold */
     .interview-body-stack p {
       font-family: var(--font-body);
       font-weight: 700;
@@ -1107,7 +1095,6 @@
       text-align-last: left;
     }
 
-    /* Botón de regreso a Entrevistas_ en esquina inferior izquierda */
     .interview-back-btn {
       appearance: none;
       -webkit-appearance: none;
@@ -1211,7 +1198,373 @@
     }
 
     /* ==========================================================================
-       11. PESTAÑA QUIÉN SOMOS_ (ACOMODO DIAGONAL + JUSTIFICADO EN TODAS LAS LÍNEAS)
+       11. PESTAÑA BLOG_ (PILA INTERACTIVA DE FANZINES)
+       ========================================================================== */
+    .blog-view.is-active {
+      display: block;
+      padding: 0;
+    }
+
+    .blog-topbar {
+      position: fixed;
+      top: calc(14px + env(safe-area-inset-top));
+      left: calc(18px + env(safe-area-inset-left));
+      right: calc(18px + env(safe-area-inset-right));
+      z-index: 35;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .blog-topbar > * {
+      pointer-events: auto;
+    }
+
+    .blog-footer-title {
+      position: fixed;
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      left: calc(18px + env(safe-area-inset-left));
+      z-index: 35;
+      pointer-events: none;
+    }
+
+    .zines-table {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 25;
+      touch-action: none;
+    }
+
+    .zines-pile-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .zine-card {
+      position: absolute;
+      width: clamp(148px, 38vw, 195px);
+      aspect-ratio: 1080 / 1350;
+      background-color: #111111;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.8);
+      cursor: grab;
+      touch-action: none;
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+      will-change: transform, left, top;
+      transition: box-shadow 0.12s ease;
+    }
+
+    .zine-card.is-square {
+      width: clamp(148px, 38vw, 195px);
+      aspect-ratio: 1 / 1;
+    }
+
+    .zine-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .zine-card.is-dragging {
+      cursor: grabbing;
+      box-shadow: 8px 10px 0px var(--accent-yellow), 0 22px 38px rgba(0, 0, 0, 0.92);
+    }
+
+    .zine-card:hover:not(.is-dragging) {
+      box-shadow: 5px 7px 0px var(--accent-yellow), 0 18px 34px rgba(0, 0, 0, 0.88);
+    }
+
+    @media (min-width: 900px) {
+      .blog-topbar {
+        top: 34px;
+        left: 42px;
+        right: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .blog-footer-title {
+        bottom: 34px;
+        left: 42px;
+      }
+
+      .zine-card {
+        width: clamp(210px, 19.5vw, 290px);
+      }
+
+      .zine-card.is-square {
+        width: clamp(210px, 19.5vw, 290px);
+      }
+    }
+
+    /* ==========================================================================
+       12. DETALLE DE BLOG_ (LIBRO ABIERTO EN DESKTOP / 1 FOTO + DOTS EN MÓVIL)
+       ========================================================================== */
+    .blog-detail-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .blog-detail-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .blog-reader-stage {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      position: relative;
+    }
+
+    .blog-book-wrapper {
+      width: 100%;
+      max-width: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .blog-book-track {
+      width: 100%;
+      aspect-ratio: 1080 / 1350;
+      max-height: 56dvh;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      cursor: grab;
+      scrollbar-width: none;
+    }
+
+    .blog-book-track.is-square {
+      aspect-ratio: 1 / 1;
+      max-height: 50dvh;
+    }
+
+    .blog-book-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .blog-book-track.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    .blog-page-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      scroll-snap-align: start;
+      background-color: var(--accent-yellow);
+      overflow: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+      position: relative;
+    }
+
+    .blog-page-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Puntos indicadores amarillos */
+    .blog-reader-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .blog-reader-dot {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      padding: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(243, 230, 0, 0.35);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .blog-reader-dot.is-active {
+      background-color: var(--accent-yellow);
+      transform: scale(1.22);
+    }
+
+    /* Flechas discretas de navegación de página en escritorio */
+    .book-arrow-btn {
+      display: none;
+    }
+
+    .blog-back-btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: none;
+      padding: 2px 8px;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(2.1rem, 9.5vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+      text-align: left;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: none;
+    }
+
+    .blog-back-btn:hover,
+    .blog-back-btn:focus-visible,
+    .blog-back-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    /* MODO LIBRO ABIERTO EN ESCRITORIO (>= 900px) */
+    @media (min-width: 900px) {
+      .blog-detail-view.is-active {
+        display: grid;
+        grid-template-columns: 185px 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 48px 34px 42px;
+        gap: 18px 32px;
+      }
+
+      .blog-detail-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .blog-reader-stage {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .blog-book-wrapper {
+        max-width: min(74vw, 940px);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      /* Libro abierto: 2 páginas pegadas con pliegue central */
+      .blog-book-track {
+        width: 100%;
+        max-height: 76dvh;
+        aspect-ratio: 2160 / 1350;
+        position: relative;
+        box-shadow: 0 22px 50px rgba(0, 0, 0, 0.85);
+      }
+
+      .blog-book-track.is-square {
+        aspect-ratio: 2 / 1;
+        max-height: 66dvh;
+      }
+
+      .blog-page-slide {
+        flex: 0 0 50%;
+        width: 50%;
+        height: 100%;
+      }
+
+      /* Pliegue sutil del lomo entre página izquierda y derecha */
+      .blog-page-slide:nth-child(odd) {
+        border-right: 2px solid #000000;
+        box-shadow: inset -14px 0 22px -12px rgba(0, 0, 0, 0.45);
+      }
+
+      .blog-page-slide:nth-child(even) {
+        border-left: 2px solid #000000;
+        box-shadow: inset 14px 0 22px -12px rgba(0, 0, 0, 0.45);
+      }
+
+      .book-arrow-btn {
+        appearance: none;
+        -webkit-appearance: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: var(--ink-white);
+        font-family: var(--font-index);
+        font-weight: 500;
+        font-size: 1.55rem;
+        line-height: 1;
+        padding: 6px 10px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: none;
+      }
+
+      .book-arrow-btn:hover,
+      .book-arrow-btn:focus-visible {
+        background-color: var(--accent-yellow);
+        color: var(--ink-black);
+        outline: none;
+      }
+
+      .book-arrow-btn:disabled {
+        opacity: 0.2;
+        pointer-events: none;
+      }
+
+      .blog-back-btn {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+        justify-self: start;
+      }
+    }
+
+    /* ==========================================================================
+       13. PESTAÑA QUIÉN SOMOS_
        ========================================================================== */
     .quienes-view.is-active {
       display: flex;
@@ -1394,8 +1747,6 @@
 
   <!-- 2. HOME PAGE -->
   <main class="home-shell" id="home-view">
-
-    <!-- Logo negro en PNG -->
     <a href="#inicio" class="brand-logo" id="home-logo-link" aria-label="arte underground_ inicio">
       <img
         src="logo au negro@300x.png"
@@ -1407,7 +1758,6 @@
       </span>
     </a>
 
-    <!-- Índice de navegación -->
     <nav class="main-nav" aria-label="Menú principal">
       <ul class="nav-list">
         <li class="nav-item"><a href="#tikets" class="nav-link" data-route="tikets">Tikets_</a></li>
@@ -1420,16 +1770,13 @@
       </ul>
     </nav>
 
-    <!-- Manifiesto justificado en todas las líneas -->
     <aside class="brand-manifesto">
       <p>
         Somos una plataforma de arte dedicada a producir exposiciones artísticas y a alzar la voz ante problemas sociales.
       </p>
     </aside>
-
   </main>
 
-  <!-- Botón limpiar muro (solo en Home) -->
   <button id="clear-spray-btn" type="button" title="Limpiar trazos de grafiti (Tecla C)">
     Limpiar muro_
   </button>
@@ -1439,24 +1786,17 @@
 
   <!-- 4. PESTAÑA TIKETS_ -->
   <section class="dark-section tickets-view" id="tickets-view" aria-label="Sección Tikets_">
-
     <div class="tickets-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
@@ -1466,7 +1806,7 @@
         <li><button type="button" class="section-nav-btn is-current" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1477,52 +1817,32 @@
     <div class="tickets-stage">
       <div class="event-cta-box">
         <h2 class="event-title">Expo II _</h2>
-        <a
-          href="https://www.tikzet.com/events/fashion-runway"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="buy-btn"
-          id="buy-ticket-btn"
-        >COMPRAR</a>
+        <a href="https://www.tikzet.com/events/fashion-runway" target="_blank" rel="noopener noreferrer" class="buy-btn" id="buy-ticket-btn">COMPRAR</a>
         <p class="event-date">19 / 12 / 26</p>
       </div>
 
       <div class="flyer-frame">
-        <img
-          src="FLYER PARED-06.png"
-          alt="Flyer Expo II Fashion Runway"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:0.95rem; padding:16px; text-align:center;">
-          FLYER PARED-06.png
-        </span>
+        <img src="FLYER PARED-06.png" alt="Flyer Expo II Fashion Runway" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:0.95rem; padding:16px; text-align:center;">FLYER PARED-06.png</span>
       </div>
     </div>
 
     <h1 class="section-footer-title">Tikets_</h1>
-
   </section>
 
   <!-- 5. PESTAÑA EXPOSICIONES_ -->
   <section class="dark-section exposiciones-view" id="exposiciones-view" aria-label="Sección Exposiciones_">
-
     <div class="exposiciones-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
@@ -1532,7 +1852,7 @@
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1546,29 +1866,21 @@
     </div>
 
     <h1 class="section-footer-title">Exposiciones_</h1>
-
   </section>
 
   <!-- 6. SECCIÓN FASHION RUNWAY I _ -->
   <section class="dark-section runway-detail-view fr1-view" id="fr1-view" aria-label="Exposición Fashion Runway I">
-
     <div class="runway-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
@@ -1578,7 +1890,7 @@
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1588,18 +1900,10 @@
 
     <div class="runway-gallery-wrap">
       <div class="runway-carousel" id="fr1-carousel" role="region" aria-label="Galería fotográfica Fashion Runway I">
-        <figure class="runway-slide">
-          <img src="frl 1.png" alt="Fashion Runway I - Fotografía 1" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="runway-slide">
-          <img src="frl 2.png" alt="Fashion Runway I - Fotografía 2" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="runway-slide">
-          <img src="frl 3.png" alt="Fashion Runway I - Fotografía 3" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="runway-slide">
-          <img src="frl 4.png" alt="Fashion Runway I - Fotografía 4" onerror="this.style.display='none';" />
-        </figure>
+        <figure class="runway-slide"><img src="frl 1.png" alt="Fashion Runway I - Fotografía 1" onerror="this.style.display='none';" /></figure>
+        <figure class="runway-slide"><img src="frl 2.png" alt="Fashion Runway I - Fotografía 2" onerror="this.style.display='none';" /></figure>
+        <figure class="runway-slide"><img src="frl 3.png" alt="Fashion Runway I - Fotografía 3" onerror="this.style.display='none';" /></figure>
+        <figure class="runway-slide"><img src="frl 4.png" alt="Fashion Runway I - Fotografía 4" onerror="this.style.display='none';" /></figure>
       </div>
     </div>
 
@@ -1610,29 +1914,21 @@
     </div>
 
     <h1 class="runway-title">FASHION<br>RUNWAY I _</h1>
-
   </section>
 
-  <!-- 7. SECCIÓN FASHION RUNWAY II _ (FOTOS ROTADAS 1 GRADO) -->
+  <!-- 7. SECCIÓN FASHION RUNWAY II _ -->
   <section class="dark-section runway-detail-view fr2-view" id="fr2-view" aria-label="Exposición Fashion Runway II">
-
     <div class="runway-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
@@ -1642,7 +1938,7 @@
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1652,18 +1948,10 @@
 
     <div class="runway-gallery-wrap">
       <div class="runway-carousel" id="fr2-carousel" role="region" aria-label="Galería fotográfica Fashion Runway II">
-        <figure class="runway-slide">
-          <img src="frll 1.png" alt="Fashion Runway II - Fotografía 1" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="runway-slide">
-          <img src="frll 2.png" alt="Fashion Runway II - Fotografía 2" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="runway-slide">
-          <img src="frll 3.png" alt="Fashion Runway II - Fotografía 3" onerror="this.style.display='none';" />
-        </figure>
-        <figure class="runway-slide">
-          <img src="frll 4.png" alt="Fashion Runway II - Fotografía 4" onerror="this.style.display='none';" />
-        </figure>
+        <figure class="runway-slide"><img src="frll 1.png" alt="Fashion Runway II - Fotografía 1" onerror="this.style.display='none';" /></figure>
+        <figure class="runway-slide"><img src="frll 2.png" alt="Fashion Runway II - Fotografía 2" onerror="this.style.display='none';" /></figure>
+        <figure class="runway-slide"><img src="frll 3.png" alt="Fashion Runway II - Fotografía 3" onerror="this.style.display='none';" /></figure>
+        <figure class="runway-slide"><img src="frll 4.png" alt="Fashion Runway II - Fotografía 4" onerror="this.style.display='none';" /></figure>
       </div>
     </div>
 
@@ -1674,29 +1962,21 @@
     </div>
 
     <h1 class="runway-title">FASHION<br>RUNWAY II _</h1>
-
   </section>
 
-  <!-- 8. PESTAÑA ENTREVISTAS_ (ÍNDICE) -->
+  <!-- 8. PESTAÑA ENTREVISTAS_ -->
   <section class="dark-section entrevistas-view" id="entrevistas-view" aria-label="Sección Entrevistas_">
-
     <div class="entrevistas-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
@@ -1706,7 +1986,7 @@
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1717,66 +1997,48 @@
     <div class="entrevistas-stage">
       <div class="entrevistas-grid">
         <button type="button" class="interview-card" data-interview="punkstar">
-          <span class="interview-thumb">
-            <img src="e1.jpg" alt="Entrevista Punkstar" onerror="this.style.display='none';" />
-          </span>
+          <span class="interview-thumb"><img src="e1.jpg" alt="Entrevista Punkstar" onerror="this.style.display='none';" /></span>
           <span class="interview-caption">Punkstar</span>
         </button>
 
         <button type="button" class="interview-card" data-interview="basurtto">
-          <span class="interview-thumb">
-            <img src="e2.jpg" alt="Entrevista Basurtto" onerror="this.style.display='none';" />
-          </span>
+          <span class="interview-thumb"><img src="e2.jpg" alt="Entrevista Basurtto" onerror="this.style.display='none';" /></span>
           <span class="interview-caption">Basurtto</span>
         </button>
 
         <button type="button" class="interview-card" data-interview="nck">
-          <span class="interview-thumb">
-            <img src="e3.jpg" alt="Entrevista NCK" onerror="this.style.display='none';" />
-          </span>
+          <span class="interview-thumb"><img src="e3.jpg" alt="Entrevista NCK" onerror="this.style.display='none';" /></span>
           <span class="interview-caption">NCK</span>
         </button>
 
         <button type="button" class="interview-card" data-interview="kills">
-          <span class="interview-thumb">
-            <img src="e4.jpg" alt="Entrevista Kills" onerror="this.style.display='none';" />
-          </span>
+          <span class="interview-thumb"><img src="e4.jpg" alt="Entrevista Kills" onerror="this.style.display='none';" /></span>
           <span class="interview-caption">Kills</span>
         </button>
 
         <button type="button" class="interview-card" data-interview="indie-enfants">
-          <span class="interview-thumb">
-            <img src="e5.jpg" alt="Entrevista Indie Enfants" onerror="this.style.display='none';" />
-          </span>
+          <span class="interview-thumb"><img src="e5.jpg" alt="Entrevista Indie Enfants" onerror="this.style.display='none';" /></span>
           <span class="interview-caption">Indie Enfants</span>
         </button>
       </div>
     </div>
 
     <h1 class="section-footer-title entrevistas-footer-title">Entrevistas_</h1>
-
   </section>
 
-  <!-- 9. DETALLE DE ENTREVISTA INDIVIDUAL (PUNKSTAR, BASURTTO, NCK, KILLS, INDIE ENFANTS) -->
+  <!-- 9. DETALLE DE ENTREVISTA INDIVIDUAL -->
   <section class="dark-section interview-detail-view" id="interview-detail-view" aria-label="Detalle de entrevista">
-
     <div class="interview-detail-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
@@ -1786,7 +2048,7 @@
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1794,45 +2056,115 @@
       </ul>
     </div>
 
-    <!-- Carrusel de 5 fotos con swipe horizontal + autoplay cada 5 segundos + puntos -->
     <div class="interview-media-col">
       <div class="interview-slider-track" id="interview-slider-track" role="region" aria-label="Galería de entrevista"></div>
       <div class="interview-dots" id="interview-dots" role="tablist" aria-label="Seleccionar fotografía"></div>
     </div>
 
-    <!-- Texto justificado con Owners Bold + scroll vertical -->
     <div class="interview-text-col" id="interview-text-col">
       <h2 class="interview-mobile-subtitle" id="interview-mobile-subtitle">Punkstar</h2>
       <div class="interview-body-stack" id="interview-body-stack"></div>
     </div>
 
-    <!-- Título inferior en esquina inferior izquierda para regresar a Entrevistas_ -->
     <button type="button" class="interview-back-btn" id="interview-back-btn" aria-label="Volver a Entrevistas_">
       Punkstar_
     </button>
-
   </section>
 
-  <!-- 10. PESTAÑA QUIÉN SOMOS_ -->
-  <section class="dark-section quienes-view" id="quienes-view" aria-label="Sección Quién Somos_">
-
-    <div class="quienes-topbar">
+  <!-- 10. PESTAÑA BLOG_ (PILA INTERACTIVA DE FANZINES) -->
+  <section class="dark-section blog-view" id="blog-view" aria-label="Sección Blog_">
+    <div class="blog-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
-        <img
-          src="logo au blanco@300x.png"
-          alt="arte underground_"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">
-          arte<br>under<br>ground_
-        </span>
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
       </button>
 
       <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="zines-table" id="zines-table" aria-label="Mesa interactiva de fanzines">
+      <div class="zines-pile-container" id="zines-pile-container"></div>
+    </div>
+
+    <h1 class="section-footer-title blog-footer-title">Blog_</h1>
+  </section>
+
+  <!-- 11. INTERIOR DE BLOG_ (LIBRO ABIERTO EN DESKTOP / 1 PÁGINA EN MÓVIL) -->
+  <section class="dark-section blog-detail-view" id="blog-detail-view" aria-label="Lector de fanzine">
+    <div class="blog-detail-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="blog-reader-stage">
+      <div class="blog-book-wrapper">
+        <button type="button" class="book-arrow-btn" id="book-prev-btn" aria-label="Página anterior">←</button>
+        <div class="blog-book-track" id="blog-book-track" role="region" aria-label="Páginas del fanzine"></div>
+        <button type="button" class="book-arrow-btn" id="book-next-btn" aria-label="Página siguiente">→</button>
+      </div>
+      <div class="blog-reader-dots" id="blog-reader-dots" role="tablist" aria-label="Seleccionar página"></div>
+    </div>
+
+    <button type="button" class="blog-back-btn" id="blog-back-btn" aria-label="Volver a pila de Blog_">
+      Blog_
+    </button>
+  </section>
+
+  <!-- 12. PESTAÑA QUIÉN SOMOS_ -->
+  <section class="dark-section quienes-view" id="quienes-view" aria-label="Sección Quién Somos_">
+    <div class="quienes-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="quienes-somos">Quien somos_</button></span>
@@ -1842,7 +2174,7 @@
         <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
@@ -1877,7 +2209,6 @@
     </div>
 
     <h1 class="section-footer-title quienes-footer-title">Quién<br>Somos_</h1>
-
   </section>
 
   <script>
@@ -1994,6 +2325,49 @@
         ]
       }
     };
+
+    /* ========================================================================
+       BASE DE DATOS DE FANZINES DEL BLOG_
+       (3 VERTICALES 1080x1350 + 1 CUADRADA 1:1)
+       ======================================================================== */
+    const BLOG_ZINES_DATA = [
+      {
+        id: 'avanzada-regia',
+        title: 'Avanzada Regia',
+        aspect: 'portrait', // 1080x1350 (4:5)
+        cover: 'av1.jpg',
+        pages: ['av1.jpg', 'av2.jpg', 'av3.jpg', 'av4.jpg'],
+        desktopPos: { leftPct: 45, topPct: 13, rot: -5, z: 11 },
+        mobilePos:  { leftPct: 33, topPct: 31, rot: -5, z: 11 }
+      },
+      {
+        id: 'future-of-fashion',
+        title: 'Future of Fashion',
+        aspect: 'portrait', // 1080x1350 (4:5)
+        cover: 'ft1.jpeg',
+        pages: ['ft1.jpeg', 'ft2.jpeg', 'ft3.jpeg', 'ft4.jpeg', 'ft5.jpeg', 'ft6.jpeg'],
+        desktopPos: { leftPct: 59, topPct: 24, rot: 4, z: 12 },
+        mobilePos:  { leftPct: 56, topPct: 37, rot: 4, z: 12 }
+      },
+      {
+        id: 'noreste-sin-fraking',
+        title: 'Noreste sin Fraking',
+        aspect: 'portrait', // 1080x1350 (4:5)
+        cover: 'nf1.png',
+        pages: ['nf1.png', 'nf2.png', 'nf3.png', 'nf4.png', 'nf5.png'],
+        desktopPos: { leftPct: 33, topPct: 34, rot: -8, z: 13 },
+        mobilePos:  { leftPct: 10, topPct: 43, rot: -8, z: 13 }
+      },
+      {
+        id: 'riot',
+        title: 'Riot',
+        aspect: 'square', // 1:1
+        cover: 'rr1.jpg',
+        pages: ['rr1.jpg', 'rr2.jpg', 'rr3.jpg', 'rr4.jpg'],
+        desktopPos: { leftPct: 46, topPct: 46, rot: 3, z: 14 },
+        mobilePos:  { leftPct: 38, topPct: 50, rot: 3, z: 14 }
+      }
+    ];
 
     /* ========================================================================
        MOTOR DE GRAFITI (SOLO ACTIVO EN LA HOME PAGE)
@@ -2348,6 +2722,271 @@
     })();
 
     /* ========================================================================
+       MOTOR INTERACTIVO DE BLOG_ (PILA DE FANZINES + LECTOR TIPO LIBRO ABIERTO)
+       ======================================================================== */
+    const BlogEngine = (() => {
+      const pileContainer = document.getElementById('zines-pile-container');
+      const bookTrack = document.getElementById('blog-book-track');
+      const dotsContainer = document.getElementById('blog-reader-dots');
+      const prevBtn = document.getElementById('book-prev-btn');
+      const nextBtn = document.getElementById('book-next-btn');
+
+      let topZIndex = 20;
+      let isInitialized = false;
+      let currentZine = null;
+      let currentStep = 0;
+      let totalSteps = 0;
+
+      function isDesktopView() {
+        return window.innerWidth >= 900;
+      }
+
+      function attachZineDragAndTap(card, zine) {
+        let isPointerDown = false;
+        let hasDragged = false;
+        let startX = 0;
+        let startY = 0;
+        let origLeft = 0;
+        let origTop = 0;
+
+        card.addEventListener('pointerdown', (e) => {
+          if (e.button !== undefined && e.button !== 0) return;
+          e.stopPropagation();
+
+          isPointerDown = true;
+          hasDragged = false;
+          startX = e.clientX;
+          startY = e.clientY;
+
+          topZIndex += 1;
+          card.style.zIndex = topZIndex;
+          card.classList.add('is-dragging');
+
+          const rect = card.getBoundingClientRect();
+          const parentRect = pileContainer.getBoundingClientRect();
+          origLeft = rect.left - parentRect.left;
+          origTop = rect.top - parentRect.top;
+
+          card.style.left = `${origLeft}px`;
+          card.style.top = `${origTop}px`;
+          card.style.transform = `rotate(${card.dataset.rotation || 0}deg) scale(1.03)`;
+
+          try {
+            card.setPointerCapture(e.pointerId);
+          } catch (_) {}
+        });
+
+        card.addEventListener('pointermove', (e) => {
+          if (!isPointerDown) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+
+          if (Math.hypot(dx, dy) > 6) {
+            hasDragged = true;
+          }
+
+          if (hasDragged) {
+            const parentRect = pileContainer.getBoundingClientRect();
+            const minLeft = -card.offsetWidth * 0.25;
+            const maxLeft = parentRect.width - card.offsetWidth * 0.75;
+            const minTop = -card.offsetHeight * 0.15;
+            const maxTop = parentRect.height - card.offsetHeight * 0.75;
+
+            const newLeft = Math.max(minLeft, Math.min(maxLeft, origLeft + dx));
+            const newTop = Math.max(minTop, Math.min(maxTop, origTop + dy));
+
+            card.style.left = `${newLeft}px`;
+            card.style.top = `${newTop}px`;
+          }
+        });
+
+        const endPointer = (e) => {
+          if (!isPointerDown) return;
+          isPointerDown = false;
+          card.classList.remove('is-dragging');
+          card.style.transform = `rotate(${card.dataset.rotation || 0}deg) scale(1)`;
+
+          try {
+            card.releasePointerCapture(e.pointerId);
+          } catch (_) {}
+
+          if (!hasDragged && window.AppNavigate) {
+            window.AppNavigate(`blog-${zine.id}`);
+          }
+        };
+
+        card.addEventListener('pointerup', endPointer);
+        card.addEventListener('pointercancel', endPointer);
+      }
+
+      function renderZinesPile() {
+        pileContainer.innerHTML = '';
+        topZIndex = 20;
+        const desktop = isDesktopView();
+
+        BLOG_ZINES_DATA.forEach((zine) => {
+          const card = document.createElement('div');
+          card.className = zine.aspect === 'square' ? 'zine-card is-square' : 'zine-card';
+          card.setAttribute('role', 'button');
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('aria-label', `Abrir fanzine ${zine.title}`);
+
+          const pos = desktop ? zine.desktopPos : zine.mobilePos;
+          card.style.left = `${pos.leftPct}%`;
+          card.style.top = `${pos.topPct}%`;
+          card.style.zIndex = pos.z;
+          card.dataset.rotation = pos.rot;
+          card.style.transform = `rotate(${pos.rot}deg)`;
+
+          const img = document.createElement('img');
+          img.src = zine.cover;
+          img.alt = zine.title;
+          img.onerror = function () { this.style.display = 'none'; };
+
+          card.appendChild(img);
+          attachZineDragAndTap(card, zine);
+
+          card.addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && window.AppNavigate) {
+              e.preventDefault();
+              window.AppNavigate(`blog-${zine.id}`);
+            }
+          });
+
+          pileContainer.appendChild(card);
+        });
+
+        isInitialized = true;
+      }
+
+      function ensurePileRendered() {
+        if (!isInitialized) {
+          renderZinesPile();
+        }
+      }
+
+      function updateReaderUI(stepIndex) {
+        currentStep = Math.max(0, Math.min(totalSteps - 1, stepIndex));
+        dotsContainer.querySelectorAll('.blog-reader-dot').forEach((dot, idx) => {
+          dot.classList.toggle('is-active', idx === currentStep);
+        });
+        if (prevBtn) prevBtn.disabled = currentStep <= 0;
+        if (nextBtn) nextBtn.disabled = currentStep >= totalSteps - 1;
+      }
+
+      function goToStep(stepIndex, smooth = true) {
+        if (!bookTrack || totalSteps === 0) return;
+        const target = Math.max(0, Math.min(totalSteps - 1, stepIndex));
+        const stepWidth = bookTrack.clientWidth;
+        bookTrack.scrollTo({
+          left: target * stepWidth,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+        updateReaderUI(target);
+      }
+
+      function loadZineReader(zineId) {
+        const zine = BLOG_ZINES_DATA.find((z) => z.id === zineId) || BLOG_ZINES_DATA[0];
+        currentZine = zine;
+        currentStep = 0;
+
+        bookTrack.classList.toggle('is-square', zine.aspect === 'square');
+        bookTrack.innerHTML = '';
+        dotsContainer.innerHTML = '';
+
+        zine.pages.forEach((src, idx) => {
+          const slide = document.createElement('figure');
+          slide.className = 'blog-page-slide';
+
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `${zine.title} - Página ${idx + 1}`;
+          img.onerror = function () { this.style.display = 'none'; };
+
+          slide.appendChild(img);
+          bookTrack.appendChild(slide);
+        });
+
+        /* En escritorio se muestran 2 páginas por vista (libro abierto); en móvil 1 página por vista */
+        const desktop = isDesktopView();
+        totalSteps = desktop ? Math.ceil(zine.pages.length / 2) : zine.pages.length;
+
+        for (let i = 0; i < totalSteps; i++) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = i === 0 ? 'blog-reader-dot is-active' : 'blog-reader-dot';
+          dot.setAttribute('aria-label', desktop ? `Pliego ${i + 1}` : `Página ${i + 1}`);
+          dot.addEventListener('click', () => goToStep(i, true));
+          dotsContainer.appendChild(dot);
+        }
+
+        bookTrack.scrollLeft = 0;
+        updateReaderUI(0);
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => goToStep(currentStep - 1, true));
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => goToStep(currentStep + 1, true));
+      }
+
+      bookTrack.addEventListener('scroll', () => {
+        const stepWidth = bookTrack.clientWidth || 1;
+        const idx = Math.round(bookTrack.scrollLeft / stepWidth);
+        if (idx >= 0 && idx < totalSteps && idx !== currentStep) {
+          updateReaderUI(idx);
+        }
+      });
+
+      /* Arrastre con mouse en el libro abierto (escritorio) */
+      let isMouseDown = false;
+      let startX = 0;
+      let scrollStart = 0;
+
+      bookTrack.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        bookTrack.classList.add('is-dragging');
+        startX = e.pageX - bookTrack.offsetLeft;
+        scrollStart = bookTrack.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        bookTrack.classList.remove('is-dragging');
+        const stepWidth = bookTrack.clientWidth || 1;
+        const nearest = Math.round(bookTrack.scrollLeft / stepWidth);
+        goToStep(nearest, true);
+      });
+
+      bookTrack.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - bookTrack.offsetLeft;
+        const walk = (x - startX) * 1.25;
+        bookTrack.scrollLeft = scrollStart - walk;
+      });
+
+      /* Reajusta paginación si cambia orientación o tamaño de ventana */
+      let lastDesktopState = isDesktopView();
+      window.addEventListener('resize', () => {
+        const nowDesktop = isDesktopView();
+        if (nowDesktop !== lastDesktopState) {
+          lastDesktopState = nowDesktop;
+          if (document.getElementById('blog-detail-view').classList.contains('is-active') && currentZine) {
+            loadZineReader(currentZine.id);
+          }
+        }
+      });
+
+      return {
+        ensurePile: ensurePileRendered,
+        openZine: loadZineReader
+      };
+    })();
+
+    /* ========================================================================
        NAVEGACIÓN Y TRANSICIÓN SÓLIDA DE ABAJO A ARRIBA (SIN DEGRADADO)
        ======================================================================== */
     (() => {
@@ -2359,10 +2998,13 @@
       const fr2View = document.getElementById('fr2-view');
       const entrevistasView = document.getElementById('entrevistas-view');
       const interviewDetailView = document.getElementById('interview-detail-view');
+      const blogView = document.getElementById('blog-view');
+      const blogDetailView = document.getElementById('blog-detail-view');
       const quienesView = document.getElementById('quienes-view');
       const fr1Carousel = document.getElementById('fr1-carousel');
       const fr2Carousel = document.getElementById('fr2-carousel');
       const interviewBackBtn = document.getElementById('interview-back-btn');
+      const blogBackBtn = document.getElementById('blog-back-btn');
 
       let currentRoute = 'home';
       let isTransitioning = false;
@@ -2375,6 +3017,8 @@
         fr2View.classList.remove('is-active');
         entrevistasView.classList.remove('is-active');
         interviewDetailView.classList.remove('is-active');
+        blogView.classList.remove('is-active');
+        blogDetailView.classList.remove('is-active');
         quienesView.classList.remove('is-active');
 
         if (!targetRoute.startsWith('entrevista-')) {
@@ -2409,6 +3053,17 @@
           document.body.style.backgroundColor = '#000000';
           GraffitiEngine.disable();
           InterviewSlider.load(key);
+        } else if (targetRoute === 'blog') {
+          blogView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+          BlogEngine.ensurePile();
+        } else if (targetRoute.startsWith('blog-')) {
+          const zineId = targetRoute.replace('blog-', '');
+          blogDetailView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+          BlogEngine.openZine(zineId);
         } else if (targetRoute === 'quienes-somos') {
           quienesView.classList.add('is-active');
           document.body.style.backgroundColor = '#000000';
@@ -2448,6 +3103,8 @@
         }, 340);
       }
 
+      window.AppNavigate = navigateTo;
+
       document.querySelectorAll('.nav-link').forEach((link) => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
@@ -2456,6 +3113,7 @@
             route === 'tikets' ||
             route === 'exposiciones' ||
             route === 'entrevistas' ||
+            route === 'blog' ||
             route === 'quienes-somos'
           ) {
             navigateTo(route);
@@ -2496,6 +3154,10 @@
 
       if (interviewBackBtn) {
         interviewBackBtn.addEventListener('click', () => navigateTo('entrevistas'));
+      }
+
+      if (blogBackBtn) {
+        blogBackBtn.addEventListener('click', () => navigateTo('blog'));
       }
     })();
   </script>
