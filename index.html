@@ -1396,7 +1396,6 @@
       -webkit-user-drag: none;
     }
 
-    /* Puntos indicadores amarillos */
     .blog-reader-dots {
       display: flex;
       align-items: center;
@@ -1423,7 +1422,6 @@
       transform: scale(1.22);
     }
 
-    /* Flechas discretas de navegación de página en escritorio */
     .book-arrow-btn {
       display: none;
     }
@@ -1455,7 +1453,6 @@
       outline: none;
     }
 
-    /* MODO LIBRO ABIERTO EN ESCRITORIO (>= 900px) */
     @media (min-width: 900px) {
       .blog-detail-view.is-active {
         display: grid;
@@ -1493,7 +1490,6 @@
         gap: 14px;
       }
 
-      /* Libro abierto: 2 páginas pegadas con pliegue central */
       .blog-book-track {
         width: 100%;
         max-height: 76dvh;
@@ -1513,7 +1509,6 @@
         height: 100%;
       }
 
-      /* Pliegue sutil del lomo entre página izquierda y derecha */
       .blog-page-slide:nth-child(odd) {
         border-right: 2px solid #000000;
         box-shadow: inset -14px 0 22px -12px rgba(0, 0, 0, 0.45);
@@ -1564,7 +1559,288 @@
     }
 
     /* ==========================================================================
-       13. PESTAÑA QUIÉN SOMOS_
+       13. PESTAÑA DIRECTORIO DE ARTISTAS_ (CATEGORÍAS INCLINADAS + LISTAS IG)
+       ========================================================================== */
+    .directorio-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .directorio-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .directorio-stage {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(34px, 7vh, 56px);
+    }
+
+    .dir-cat-btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background-color: transparent;
+      border: none;
+      padding: 2px 12px;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(1.38rem, 5.8vw, 2.55rem);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--ink-white);
+      cursor: pointer;
+      transition: none;
+      white-space: nowrap;
+    }
+
+    .dir-cat-btn:hover,
+    .dir-cat-btn:focus-visible,
+    .dir-cat-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    .dir-cat-moda {
+      transform: rotate(2.2deg);
+    }
+
+    .dir-cat-foto {
+      transform: rotate(3.4deg);
+    }
+
+    .dir-cat-djs {
+      transform: rotate(-4.5deg);
+    }
+
+    .directorio-footer-title {
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(2.1rem, 9.5vw, 4.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 900px) {
+      .directorio-view.is-active {
+        display: grid;
+        grid-template-columns: 185px 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 48px 34px 42px;
+        gap: 20px 32px;
+      }
+
+      .directorio-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .directorio-stage {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        height: 100%;
+        display: block;
+      }
+
+      .dir-cat-btn {
+        position: absolute;
+        font-size: clamp(1.85rem, 2.55vw, 2.55rem);
+        padding: 3px 14px;
+      }
+
+      /* Posición e inclinación fiel a la referencia en escritorio */
+      .dir-cat-moda {
+        top: 13%;
+        left: 9%;
+        transform: rotate(2deg);
+      }
+
+      .dir-cat-foto {
+        top: 36%;
+        right: 6%;
+        transform: rotate(3.6deg);
+      }
+
+      .dir-cat-djs {
+        top: 61%;
+        left: 31%;
+        transform: rotate(-5.2deg);
+      }
+
+      .directorio-footer-title {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        align-self: end;
+        justify-self: start;
+        font-size: clamp(3rem, 4.4vw, 4.4rem);
+        pointer-events: none;
+      }
+    }
+
+    /* Sub-pestañas de Directorio (Diseñadores de Moda_, Fotógrafos_, DJ's) */
+    .dir-list-view.is-active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .dir-list-topbar {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .dir-list-stage {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .dir-list-stage::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dir-handles-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: clamp(3px, 0.8vh, 7px);
+      max-width: 100%;
+    }
+
+    .dir-handle-link {
+      display: inline-block;
+      text-decoration: none;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-style: italic;
+      font-size: clamp(1.22rem, 5.2vw, 2.35rem);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--ink-white);
+      background-color: transparent;
+      padding: 1px 10px;
+      transition: none;
+      word-break: break-word;
+    }
+
+    .dir-handle-link:hover,
+    .dir-handle-link:focus-visible,
+    .dir-handle-link:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    .dir-list-back-btn {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: none;
+      padding: 2px 8px;
+      font-family: var(--font-index);
+      font-weight: 500;
+      font-size: clamp(2.1rem, 9.5vw, 4.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      color: var(--ink-white);
+      align-self: flex-start;
+      text-align: left;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: none;
+    }
+
+    .dir-list-back-btn:hover,
+    .dir-list-back-btn:focus-visible,
+    .dir-list-back-btn:active {
+      background-color: var(--accent-yellow);
+      color: var(--ink-black);
+      outline: none;
+    }
+
+    @media (min-width: 900px) {
+      .dir-list-view.is-active {
+        display: grid;
+        grid-template-columns: 185px 1fr;
+        grid-template-rows: 1fr auto;
+        align-items: stretch;
+        padding: 34px 48px 34px 42px;
+        gap: 20px 44px;
+      }
+
+      .dir-list-topbar {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .dir-list-stage {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        height: 100%;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: clamp(72px, 12vh, 130px);
+        padding-left: clamp(32px, 8vw, 130px);
+      }
+
+      .dir-handles-list {
+        gap: 4px;
+      }
+
+      .dir-handle-link {
+        font-size: clamp(1.7rem, 2.35vw, 2.4rem);
+        line-height: 1.08;
+        padding: 1px 12px;
+      }
+
+      .dir-list-back-btn {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        align-self: end;
+        justify-self: start;
+        font-size: clamp(3rem, 4.4vw, 4.4rem);
+      }
+    }
+
+    /* ==========================================================================
+       14. PESTAÑA QUIÉN SOMOS_
        ========================================================================== */
     .quienes-view.is-active {
       display: flex;
@@ -1798,7 +2074,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -1808,8 +2084,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -1844,7 +2120,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -1854,8 +2130,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -1882,7 +2158,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -1892,8 +2168,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -1930,7 +2206,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -1940,8 +2216,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -1978,7 +2254,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -1988,8 +2264,8 @@
         <li><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -2040,7 +2316,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -2050,8 +2326,8 @@
         <li><button type="button" class="section-nav-btn is-current" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -2085,7 +2361,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -2095,8 +2371,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -2122,7 +2398,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -2132,8 +2408,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -2152,7 +2428,185 @@
     </button>
   </section>
 
-  <!-- 12. PESTAÑA QUIÉN SOMOS_ -->
+  <!-- 12. PESTAÑA DIRECTORIO DE ARTISTAS_ -->
+  <section class="dark-section directorio-view" id="directorio-view" aria-label="Sección Directorio de Artistas_">
+    <div class="directorio-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="directorio-stage">
+      <button type="button" class="dir-cat-btn dir-cat-moda" data-dir-cat="moda">Diseñadores de Moda</button>
+      <button type="button" class="dir-cat-btn dir-cat-foto" data-dir-cat="fotografos">Fotógrafos</button>
+      <button type="button" class="dir-cat-btn dir-cat-djs" data-dir-cat="djs">Dj’s</button>
+    </div>
+
+    <h1 class="directorio-footer-title">Directorio<br>de Artistas_</h1>
+  </section>
+
+  <!-- 13. SUB-PESTAÑA DIRECTORIO: DISEÑADORES DE MODA_ -->
+  <section class="dark-section dir-list-view" id="dir-moda-view" aria-label="Diseñadores de Moda_">
+    <div class="dir-list-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="dir-list-stage">
+      <ul class="dir-handles-list">
+        <li><a href="https://www.instagram.com/nck_.comm/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@NCK_.COMM</a></li>
+        <li><a href="https://www.instagram.com/killsss_______/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@KILLSSS_______</a></li>
+        <li><a href="https://www.instagram.com/basurtto_/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@BASURTTO_</a></li>
+        <li><a href="https://www.instagram.com/certifiedpunkstar/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@CERTIFIEDPUNKSTAR</a></li>
+        <li><a href="https://www.instagram.com/indieenfants/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@INDIEENFANTS</a></li>
+      </ul>
+    </div>
+
+    <button type="button" class="dir-list-back-btn js-go-directorio" aria-label="Volver a Directorio de Artistas_">
+      Diseñadores<br>de Moda_
+    </button>
+  </section>
+
+  <!-- 14. SUB-PESTAÑA DIRECTORIO: DJ'S -->
+  <section class="dark-section dir-list-view" id="dir-djs-view" aria-label="DJ's">
+    <div class="dir-list-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="dir-list-stage">
+      <ul class="dir-handles-list">
+        <li><a href="https://www.instagram.com/dj.lovegasm/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@DJ.LOVEGASM</a></li>
+        <li><a href="https://www.instagram.com/anerysum/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@ANERYSUM XE</a></li>
+        <li><a href="https://www.instagram.com/gatito_cibernetico/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@GATITO_CIBERNETICO</a></li>
+        <li><a href="https://www.instagram.com/nodissrespect/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@NODISSRESPECT</a></li>
+        <li><a href="https://www.instagram.com/motelclown/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@MOTELCLOWN</a></li>
+      </ul>
+    </div>
+
+    <button type="button" class="dir-list-back-btn js-go-directorio" aria-label="Volver a Directorio de Artistas_">
+      DJ’s
+    </button>
+  </section>
+
+  <!-- 15. SUB-PESTAÑA DIRECTORIO: FOTÓGRAFOS_ -->
+  <section class="dark-section dir-list-view" id="dir-fotografos-view" aria-label="Fotógrafos_">
+    <div class="dir-list-topbar">
+      <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
+        <img src="logo au blanco@300x.png" alt="arte underground_" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none; color:#ffffff; font-family:var(--font-index); font-weight:500; font-size:1.25rem; line-height:0.95; letter-spacing:-0.03em;">arte<br>under<br>ground_</span>
+      </button>
+
+      <nav class="mobile-pipe-nav" aria-label="Navegación rápida">
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></span>
+      </nav>
+
+      <ul class="desktop-side-nav">
+        <li><button type="button" class="section-nav-btn" data-route="tikets">Tikets_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="exposiciones">Exposiciones_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn is-current" data-route="directorio">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="quienes-somos">Quien somos_</button></li>
+      </ul>
+    </div>
+
+    <div class="dir-list-stage">
+      <ul class="dir-handles-list">
+        <li><a href="https://www.instagram.com/raul.alanis17/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@RAUL.ALANIS17</a></li>
+        <li><a href="https://www.instagram.com/rangarcmissael/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@RANGARCMISSAEL</a></li>
+        <li><a href="https://www.instagram.com/jimwelles/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@JIMWELLES</a></li>
+        <li><a href="https://www.instagram.com/gerarldofotografias/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@GERARLDOFOTOGRAFIAS</a></li>
+        <li><a href="https://www.instagram.com/quintero.raw/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@QUINTERO.RAW</a></li>
+        <li><a href="https://www.instagram.com/denn.pics/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@DENN.PICS</a></li>
+        <li><a href="https://www.instagram.com/by.aniadominik/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@BY.ANIADOMINIK</a></li>
+        <li><a href="https://www.instagram.com/c.a.livrdz/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@C.A.LIVRDZ</a></li>
+        <li><a href="https://www.instagram.com/ultimo.invierno_estudio/" target="_blank" rel="noopener noreferrer" class="dir-handle-link">@ULTIMO.INVIERNO_ESTUDIO</a></li>
+      </ul>
+    </div>
+
+    <button type="button" class="dir-list-back-btn js-go-directorio" aria-label="Volver a Directorio de Artistas_">
+      Fotógrafos_
+    </button>
+  </section>
+
+  <!-- 16. PESTAÑA QUIÉN SOMOS_ -->
   <section class="dark-section quienes-view" id="quienes-view" aria-label="Sección Quién Somos_">
     <div class="quienes-topbar">
       <button type="button" class="section-logo-btn js-go-home" aria-label="Volver a inicio">
@@ -2166,7 +2620,7 @@
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="blog">Blog_</button><br></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Merch_</button><span class="pipe-sep">|</span></span>
-        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="home">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
+        <span class="pipe-item"><button type="button" class="section-nav-btn" data-route="directorio">Directorio Artistas_</button><span class="pipe-sep">|</span></span>
         <span class="pipe-item"><button type="button" class="section-nav-btn is-current" data-route="quienes-somos">Quien somos_</button></span>
       </nav>
 
@@ -2176,8 +2630,8 @@
         <li><button type="button" class="section-nav-btn" data-route="entrevistas">Entrevistas_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="blog">Blog_</button></li>
         <li><button type="button" class="section-nav-btn" data-route="home">Merch_</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Directorio</button></li>
-        <li><button type="button" class="section-nav-btn" data-route="home">Artistas_</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Directorio</button></li>
+        <li><button type="button" class="section-nav-btn" data-route="directorio">Artistas_</button></li>
         <li><button type="button" class="section-nav-btn is-current" data-route="quienes-somos">Quien somos_</button></li>
       </ul>
     </div>
@@ -2334,7 +2788,7 @@
       {
         id: 'avanzada-regia',
         title: 'Avanzada Regia',
-        aspect: 'portrait', // 1080x1350 (4:5)
+        aspect: 'portrait',
         cover: 'av1.jpg',
         pages: ['av1.jpg', 'av2.jpg', 'av3.jpg', 'av4.jpg'],
         desktopPos: { leftPct: 45, topPct: 13, rot: -5, z: 11 },
@@ -2343,7 +2797,7 @@
       {
         id: 'future-of-fashion',
         title: 'Future of Fashion',
-        aspect: 'portrait', // 1080x1350 (4:5)
+        aspect: 'portrait',
         cover: 'ft1.jpeg',
         pages: ['ft1.jpeg', 'ft2.jpeg', 'ft3.jpeg', 'ft4.jpeg', 'ft5.jpeg', 'ft6.jpeg'],
         desktopPos: { leftPct: 59, topPct: 24, rot: 4, z: 12 },
@@ -2352,7 +2806,7 @@
       {
         id: 'noreste-sin-fraking',
         title: 'Noreste sin Fraking',
-        aspect: 'portrait', // 1080x1350 (4:5)
+        aspect: 'portrait',
         cover: 'nf1.png',
         pages: ['nf1.png', 'nf2.png', 'nf3.png', 'nf4.png', 'nf5.png'],
         desktopPos: { leftPct: 33, topPct: 34, rot: -8, z: 13 },
@@ -2361,7 +2815,7 @@
       {
         id: 'riot',
         title: 'Riot',
-        aspect: 'square', // 1:1
+        aspect: 'square',
         cover: 'rr1.jpg',
         pages: ['rr1.jpg', 'rr2.jpg', 'rr3.jpg', 'rr4.jpg'],
         desktopPos: { leftPct: 46, topPct: 46, rot: 3, z: 14 },
@@ -2907,7 +3361,6 @@
           bookTrack.appendChild(slide);
         });
 
-        /* En escritorio se muestran 2 páginas por vista (libro abierto); en móvil 1 página por vista */
         const desktop = isDesktopView();
         totalSteps = desktop ? Math.ceil(zine.pages.length / 2) : zine.pages.length;
 
@@ -2939,7 +3392,6 @@
         }
       });
 
-      /* Arrastre con mouse en el libro abierto (escritorio) */
       let isMouseDown = false;
       let startX = 0;
       let scrollStart = 0;
@@ -2968,7 +3420,6 @@
         bookTrack.scrollLeft = scrollStart - walk;
       });
 
-      /* Reajusta paginación si cambia orientación o tamaño de ventana */
       let lastDesktopState = isDesktopView();
       window.addEventListener('resize', () => {
         const nowDesktop = isDesktopView();
@@ -3000,6 +3451,10 @@
       const interviewDetailView = document.getElementById('interview-detail-view');
       const blogView = document.getElementById('blog-view');
       const blogDetailView = document.getElementById('blog-detail-view');
+      const directorioView = document.getElementById('directorio-view');
+      const dirModaView = document.getElementById('dir-moda-view');
+      const dirDjsView = document.getElementById('dir-djs-view');
+      const dirFotografosView = document.getElementById('dir-fotografos-view');
       const quienesView = document.getElementById('quienes-view');
       const fr1Carousel = document.getElementById('fr1-carousel');
       const fr2Carousel = document.getElementById('fr2-carousel');
@@ -3019,6 +3474,10 @@
         interviewDetailView.classList.remove('is-active');
         blogView.classList.remove('is-active');
         blogDetailView.classList.remove('is-active');
+        directorioView.classList.remove('is-active');
+        dirModaView.classList.remove('is-active');
+        dirDjsView.classList.remove('is-active');
+        dirFotografosView.classList.remove('is-active');
         quienesView.classList.remove('is-active');
 
         if (!targetRoute.startsWith('entrevista-')) {
@@ -3064,6 +3523,22 @@
           document.body.style.backgroundColor = '#000000';
           GraffitiEngine.disable();
           BlogEngine.openZine(zineId);
+        } else if (targetRoute === 'directorio') {
+          directorioView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'directorio-moda') {
+          dirModaView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'directorio-djs') {
+          dirDjsView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
+        } else if (targetRoute === 'directorio-fotografos') {
+          dirFotografosView.classList.add('is-active');
+          document.body.style.backgroundColor = '#000000';
+          GraffitiEngine.disable();
         } else if (targetRoute === 'quienes-somos') {
           quienesView.classList.add('is-active');
           document.body.style.backgroundColor = '#000000';
@@ -3114,6 +3589,7 @@
             route === 'exposiciones' ||
             route === 'entrevistas' ||
             route === 'blog' ||
+            route === 'directorio' ||
             route === 'quienes-somos'
           ) {
             navigateTo(route);
@@ -3150,6 +3626,19 @@
             navigateTo(`entrevista-${key}`);
           }
         });
+      });
+
+      document.querySelectorAll('.dir-cat-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const cat = btn.dataset.dirCat;
+          if (cat) {
+            navigateTo(`directorio-${cat}`);
+          }
+        });
+      });
+
+      document.querySelectorAll('.js-go-directorio').forEach((btn) => {
+        btn.addEventListener('click', () => navigateTo('directorio'));
       });
 
       if (interviewBackBtn) {
